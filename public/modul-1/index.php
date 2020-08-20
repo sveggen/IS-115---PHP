@@ -1,6 +1,7 @@
+ <!-- Oppgave 2 -->
 <html>
     <head>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/modul-1/style.css">
 </head>
     <body>
         <h2>Velkommen til Norge.no</h2>
