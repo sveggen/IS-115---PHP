@@ -1,4 +1,4 @@
-<!-- Oppgave 5 -->
+<!-- Oppgave 5 --> 
 <?php
 $navn = "Markus Sveggen";
 $alder = "23";
