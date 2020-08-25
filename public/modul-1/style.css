@@ -14,7 +14,6 @@ body {
   }
 
   .tekst2 {
-    float: right;
     color: lightseagreen;
   }
 
@@ -42,7 +41,7 @@ body {
 
   footer {
     position: absolute;
-    text-align: center;
+    text-align: start;
     left: 0;
     bottom: 0;
     background-color: lightseagreen;
@@ -53,4 +52,8 @@ body {
   footer p {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  li {
+    float: right;
   }
