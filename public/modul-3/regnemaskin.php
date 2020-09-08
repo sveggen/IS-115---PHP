@@ -15,13 +15,12 @@
 	        <input name="submit" type="submit" value="Kalkuler" class="w3-circle w3-green">
 	    </form>
         </div>
-
 <?php
-$førster = $_POST['første'];
+$førstetall = $_POST['første'];
 $andre = $_POST['andre'];
 if (isset($_POST['submit']) && is_numeric($_POST['første']) && is_numeric($_POST['andre'])){
     $i = 1;
-    for($første = $førster; $i < 11; $første++){
+    for($første = $førstetall; $i < 11; $første++){
     echo "<h1>Iterasjon $i</h1>";
     $sum = $første + $andre;
     echo "<p>$første pluss {$_POST['andre']} er lik " . $sum . "</p>";
