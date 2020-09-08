@@ -10,8 +10,8 @@
         <hr width=100%”>
 
 <form method="post" action="">
-            <input name="første" type="text" placeholder="Tall 1" class="form-control" style="width:10%">
-	        <input name="andre" type="text" placeholder="Tall 2" class="form-control" style="width:10%">
+            <input name="første" type="number" placeholder="Tall 1" class="form-control" style="width:10%">
+	        <input name="andre" type="number" placeholder="Tall 2" class="form-control" style="width:10%">
 	        <input name="submit" type="submit" value="Kalkuler" class="w3-circle w3-green">
 	    </form>
         </div>

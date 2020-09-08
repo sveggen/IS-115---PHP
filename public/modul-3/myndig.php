@@ -9,7 +9,7 @@
         <hr width=100%”>
 
 <form method="post" action="">
-            <input name="alder" type="text" placeholder="Alder" class="form-control" style="width:10%">
+            <input name="alder" type="number" min="0" placeholder="Alder" class="form-control" style="width:10%">
 	        <input name="navn" type="text" placeholder="Navn" class="form-control" style="width:10%">
 	        <input name="submit" type="submit" value="Send" class="w3-circle w3-green">
 	    </form>
@@ -29,9 +29,11 @@ switch (true) {
     case ($alder>=12 && $alder<20):
         $aldertype = "tenåring";
     break;
-    case ($alder>=20):
+    case ($alder>=20 && $alder<130):
         $aldertype = "voksen";
     break;
+    case ($alder>=130):
+        $aldertype = "mest sannsynlig død";
 }
 echo $navn . " er " . $aldertype . " og er " . $myndig . ".";
 }

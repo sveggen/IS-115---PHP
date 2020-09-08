@@ -12,7 +12,7 @@
 <form method="post" action="">
             <input name="navn" type="text" placeholder="Navn" class="form-control" style="width:20%">
             <input name="adresse" type="text" placeholder="Adresse" class="form-control" style="width:20%">
-            <input name="telefonnummer" type="text" placeholder="Telefonnummer" class="form-control" style="width:20%">
+            <input name="telefonnummer" type="tel" pattern="[0-9]{8}" placeholder="Telefonnummer" class="form-control" style="width:20%">
 	        <input name="submit" type="submit" value="Send" class="w3-circle w3-green">
 	    </form>
         </div>
