@@ -3,7 +3,7 @@
 <?php
 
 //variabler
-$runde = 0;
+$runde = 1;
 $game = true;
 
 $deltakere = array(
