@@ -23,7 +23,6 @@ if (isset($_POST['submit'])){
     $game = true;
 }
 
-
 $deltakere = array("Frank" => 0, "Hans" => 0, "Oliver" => 0, "Hobbe" => 0, "Franker" => 0, "Mona" => 0);
 $runde = 0;
 while (count($deltakere) >= 2 && $game == true){
@@ -40,24 +39,23 @@ while (count($deltakere) >= 2 && $game == true){
     
     # Anonnsere flere vinnere
     if (count(array_unique($deltakere)) == 1){
-        echo "<h3><u>Deltaker " . implode(" og ", array_keys($deltakere)) . " vant</h3></u>";
-break;
+        echo '<h3><div class="p-3 mb-2 bg-success text-white">Deltaker ' . implode(" og ", array_keys($deltakere)) . ' vant</h3></div>';
+    break;
 }
     #Fjern deltaker(e)
     foreach($laveste as $item){
             unset($deltakere[$item]);
-            echo "<p>Deltaker " . $item . " ble fjernet</p>\n";
+            echo '<p class="text-danger">Deltaker ' . $item . ' røk ut</p>';
         }
 
     # Anonnsere vinner
     if (count(array_unique($deltakere)) == 1){
         if (count($deltakere) == 1){
-            echo "<h3><u>Deltaker " . implode(" og ", array_keys($deltakere)) . " vant</h3></u>";
-        break;
+            echo '<h3><div class="p-3 mb-2 bg-success text-white">Deltaker ' . implode(" og ", array_keys($deltakere)) . ' vant</div></h3></u>';
+    break;
             }
         }
     }
-
 
 ?>
     </body>
