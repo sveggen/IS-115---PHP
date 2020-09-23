@@ -12,8 +12,10 @@
 </head>
 <body>
 
+<h1>Konkurranse</h1>
+<hr width=100%”>
 <form method="post" action="">
-<input name="submit" type="submit" value="Send" class="btn btn-dark">
+<input name="submit" type="submit" value="Start konkurranse" class="btn btn-dark">
 </form>
 
 <?php
@@ -45,7 +47,7 @@ while (count($deltakere) >= 2 && $game == true){
     #Fjern deltaker(e)
     foreach($laveste as $item){
             unset($deltakere[$item]);
-            echo '<p class="text-danger">Deltaker ' . $item . ' røk ut</p>';
+            echo '<p class="text-danger">Deltaker ' . $item . ' hadde minst poeng og røk ut</p>';
         }
 
     # Anonnsere vinner

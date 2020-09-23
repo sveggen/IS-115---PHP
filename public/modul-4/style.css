@@ -2,4 +2,78 @@ body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     padding-left: 20px;
     padding-right: 20px;
+    background-color: lightblue;
   }
+
+.registrer-medlem {
+  height: 1000px;
+  background: #475d62 url(https://pixabay.com/get/53e5d1474b55a514f6da8c7dda79357d133edae44e50774975277cd49148c3_1280.jpg);
+  background-size: cover;
+  position: relative;
+}
+
+  .registrer-medlem form {
+    max-width: 600px;
+    width: 70%;
+    background-color: #1e2833;
+    padding: 40px;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    box-shadow: 4px 4px 5px rgba(6, 115, 148, 0.9);
+  }
+
+  .registrer-medlem form .form-control {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #434a52;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #7B1FA2;
+    background-color: #7B1FA2;
+  }
+
+  .custom-control-input:checked~.custom-control-label::after {
+    background-color: rgb(55, 99, 96);
+    border-radius: 50%;
+  }
+
+  .registrer-medlem form .btn-primary {
+    background: #662a48;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: none;
+  }
+
+
+  
+
+
+
+
+  
+  
+
+  
+  
+
+
+
+  
+  
+  
+  
+  

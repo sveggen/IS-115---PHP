@@ -2,48 +2,87 @@
 
 <html>
 <head>
-<title>Nytt medlem</title>
 <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/modul-4/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registrere nytt medlem</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
   
 <h1>Registrere nytt medlem</h1>
 
+<div class="registrer-medlem">
 <form action="" method="get">
+
+<div class="form-row">
 <div class="form-group">
-<div class="col-xs-4">
-<p>Fornavn: <input type="text" class="form-control" name="fornavn" />
-Etternavn: <input type="text" class="form-control" name="etternavn" />
-Epost: </br><input type="email" class="form-control" name="epost" />
-Mobilnummer: </br><input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" />
-Fødselsdato: </br><input type="date" class="form-control" name="dato" />
-<label class="radio-inline"><input type="radio" name="optradio" checked>Mann</label>
-<label class="radio-inline"><input type="radio" name="optradio">Dame</label>
-<label class="radio-inline"><input type="radio" name="optradio">Annet</label>
-Gateadresse: <input type="text" class="form-control" name="gateadresse" />
-Postnummer: <input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required/>
-Poststed: <input type="text" class="form-control" name="poststed" />
+<label for="fornavn">Fornavn: </label>
+<input type="text" class="form-control" name="fornavn" />
+</div>
 
+<div class="form-group ">
+<label for="etternavn">Etternavn: </label>
+ <input type="text" class="form-control" name="etternavn" />
+</div>
+</div>
 
-Interesser:
+<div class="form-group ">
+<label for="email">Email: </label>
+<input type="email" class="form-control" name="epost" />
+</div>
 
+<div class="form-group">
+<label for="mobilnummer">Mobilnummer: </label>
+<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" />
+</div>
 
-Kursaktiviteter:
+<div class="form-group">
+<label for="dato">Fødselsdato: </label>
+<input type="date" class="form-control" name="dato" />
+</div>
 
-Roller:
+<div class="form-group col">
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="hann" name="kjonn" class="custom-control-input">
+  <label class="custom-control-label" for="hann">Mann</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="hunn" name="kjonn" class="custom-control-input">
+  <label class="custom-control-label" for="hunn">Kvinne</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="annet" name="kjonn" class="custom-control-input">
+  <label class="custom-control-label" for="annet">Annet</label>
+</div>
+</div>
 
-    <input type="submit" class="btn btn-primary" name="knapp" value="Submit"/>
+<div class="form-row">
+<div class="form-group ">
+<label for="gateadresse">Gateadresse: </label>
+<input type="text" class="form-control" name="gateadresse" />
+</div>
+
+<div class="form-group ">
+<label for="postnummer">Postnummer: </label>
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required/>
+</div>
+
+<div class="form-group ">
+<label for="poststed">Poststed: </label>  
+<input type="text" class="form-control" name="poststed" />
+</div>
+</div>
+
+<div class="form-group">
+    <button class="btn btn-primary btn-block" type="submit">Registrer</button>
+</div>
+
 </div>
 </div>
 </div>
-</p>
-
+</div>
+</form>
 
 <?php
 echo "<p> ". $_GET['fornavn'] ." </p>";
@@ -71,13 +110,8 @@ if(isset($_POST['submit']) && !empty($ikkeutfylt)){
   echo "Følgende felt mangler verdi: " .  implode(", ", $array);
 }
 ?>
-
-
-
-</form>
-
-<div class="card">
-  <div class="card-body">Basic card</div>
-</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
