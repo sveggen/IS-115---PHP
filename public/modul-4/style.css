@@ -2,12 +2,11 @@ body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: lightblue;
+    background: #475d62 url(https://blueridgemountainlife.com/wp-content/gallery/linn-cove-viaduct/1IMG_6787.jpg);
   }
 
 .registrer-medlem {
   height: 1000px;
-  background: #475d62 url(https://pixabay.com/get/53e5d1474b55a514f6da8c7dda79357d133edae44e50774975277cd49148c3_1280.jpg);
   background-size: cover;
   position: relative;
 }
@@ -15,15 +14,15 @@ body {
   .registrer-medlem form {
     max-width: 600px;
     width: 70%;
-    background-color: #1e2833;
+    background-color: #274463;
     padding: 40px;
     border-radius: 4px;
     transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;
-    color: #fff;
-    box-shadow: 4px 4px 5px rgba(6, 115, 148, 0.9);
+    color: rgb(207, 202, 207);
+    box-shadow: 4px 4px 5px rgba(23, 85, 104, 0.9);
   }
 
   .registrer-medlem form .form-control {
@@ -48,7 +47,7 @@ body {
   }
 
   .registrer-medlem form .btn-primary {
-    background: #662a48;
+    background: #664014;
     border: none;
     border-radius: 4px;
     padding: 11px;

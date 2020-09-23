@@ -9,32 +9,33 @@
 <link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
-  
-<h1>Registrere nytt medlem</h1>
 
 <div class="registrer-medlem">
 <form action="" method="get">
 
+  <div class="form-group">
+<h3>Registrere nytt medlem</h3>
+  </div>
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
-<input type="text" class="form-control" name="fornavn" />
+<input type="text" class="form-control" name="fornavn" placeholder="Ola"/>
 </div>
 
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
- <input type="text" class="form-control" name="etternavn" />
+ <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
 </div>
 </div>
 
 <div class="form-group ">
 <label for="email">Email: </label>
-<input type="email" class="form-control" name="epost" />
+<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"/>
 </div>
 
 <div class="form-group">
 <label for="mobilnummer">Mobilnummer: </label>
-<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" />
+<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"/>
 </div>
 
 <div class="form-group">
@@ -60,18 +61,24 @@
 <div class="form-row">
 <div class="form-group ">
 <label for="gateadresse">Gateadresse: </label>
-<input type="text" class="form-control" name="gateadresse" />
+<input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"/>
 </div>
 
 <div class="form-group ">
 <label for="postnummer">Postnummer: </label>
-<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required/>
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required placeholder="1321"/>
 </div>
 
 <div class="form-group ">
 <label for="poststed">Poststed: </label>  
-<input type="text" class="form-control" name="poststed" />
+<input type="text" class="form-control" name="poststed" placeholder="Stabekk"/>
 </div>
+</div>
+
+<div class="form-group">
+<label for="interesser">Interesser: </label>
+<input type="">
+
 </div>
 
 <div class="form-group">
