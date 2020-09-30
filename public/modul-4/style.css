@@ -2,8 +2,11 @@ body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     padding-left: 20px;
     padding-right: 20px;
-    background: #475d62 url(https://blueridgemountainlife.com/wp-content/gallery/linn-cove-viaduct/1IMG_6787.jpg);
   }
+
+.bakgrunn {
+  background: #475d62 url(https://blueridgemountainlife.com/wp-content/gallery/linn-cove-viaduct/1IMG_6787.jpg);
+}
 
 .registrer-medlem {
   height: 1000px;

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
-
+<div class="bakgrunn">
 <div class="registrer-medlem">
 <form action="" method="get">
 
@@ -46,15 +46,15 @@
 
 <div class="form-group col">
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="hann" name="kjonn" class="custom-control-input">
+  <input type="radio" id="hann" name="kjonn" value="hann" class="custom-control-input">
   <label class="custom-control-label" for="hann">Mann</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="hunn" name="kjonn" class="custom-control-input">
+  <input type="radio" id="hunn" name="kjonn" value="hunn" class="custom-control-input">
   <label class="custom-control-label" for="hunn">Kvinne</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="annet" name="kjonn" class="custom-control-input">
+  <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
   <label class="custom-control-label" for="annet">Annet</label>
 </div>
 </div>
@@ -78,7 +78,7 @@
 
 <div class="form-group">
 <label for="interesser">Interesser: </label>
-<input type="">
+<input type="text" class="form-control" name="interesser" placeholder="Fotball, taekwondo, gaming"/>
 
 </div>
 
@@ -86,6 +86,7 @@
     <button class="btn btn-primary btn-block" type="submit">Registrer</button>
 </div>
 
+</div>
 </div>
 </div>
 </div>
@@ -98,24 +99,53 @@ echo "<p> ". $_GET['fornavn'] ." </p>";
 $medlem = array();
 $ikkeutfylt = array();
 
-if (isset($_POST['fornavn'])) {
-  array_push($medlem, $_POST['fornavn']);
+if (!empty($_GET['fornavn'])) {
+  array_push($medlem, $_GET['fornavn']);
 } else{
   array_push($ikkeutfylt, $verdi="Fornavn");
 }
-if (isset($_POST['etternavn'])) {
-  array_push($medlem, $_POST['etternavn']);
+if (!empty($_GET['etternavn'])) {
+  array_push($medlem, $_GET['etternavn']);
 } else{
   array_push($ikkeutfylt, $verdi="Etternavn");
 }
-if (isset($_POST['telefonnummer'])) {
-  array_push($array, $_POST['telefonnummer']);
+if (!empty($_GET['mobilnummer'])) {
+  array_push($medlem, $_GET['mobilnummer']);
 } else{
-  array_push($ikkeutfylt, $verdi="Telefonnummer");
+  array_push($ikkeutfylt, $verdi="Mobilnummer");
+}
+if (!empty($_GET['dato'])) {
+  array_push($medlem, $_GET['dato']);
+} else{
+  array_push($ikkeutfylt, $verdi="Fødselsdato");
+}
+if (!empty($_GET['kjonn'])) {
+  array_push($medlem, $_GET['kjonn']);
+} else{
+  array_push($ikkeutfylt, $verdi="Kjønn");
+}
+if (!empty($_GET['gateadresse'])) {
+  array_push($medlem, $_GET['gateadresse']);
+} else{
+  array_push($ikkeutfylt, $verdi="Gateadresse");
+}
+if (!empty($_GET['postnummer'])) {
+  array_push($medlem, $_GET['postnummer']);
+} else{
+  array_push($ikkeutfylt, $verdi="Postnummer");
+}
+if (!empty($_GET['poststed'])) {
+  array_push($medlem, $_GET['poststed']);
+} else{
+  array_push($ikkeutfylt, $verdi="Poststed");
 }
 
-if(isset($_POST['submit']) && !empty($ikkeutfylt)){
-  echo "Følgende felt mangler verdi: " .  implode(", ", $array);
+
+
+if(!empty($ikkeutfylt)){
+  echo 'Følgende felt mangler verdi: ' .  implode(", ", $ikkeutfylt);
+} else {
+  echo "Medlem har blitt registrert med følgende opplysninger:\n" . implode(", ", $medlem);
 }
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
