@@ -12,7 +12,7 @@
 <body>
 <div class="bakgrunn">
 <div class="registrer-medlem">
-<form action="" method="get">
+<form action="" method="post">
 
   <div class="form-group">
 <h3>Registrere nytt medlem</h3>
@@ -46,12 +46,12 @@
 
 <div class="form-group col">
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="hann" name="kjonn" value="hann" class="custom-control-input">
-  <label class="custom-control-label" for="hann">Mann</label>
+  <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input">
+  <label class="custom-control-label" for="mann">Mann</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="hunn" name="kjonn" value="hunn" class="custom-control-input">
-  <label class="custom-control-label" for="hunn">Kvinne</label>
+  <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input">
+  <label class="custom-control-label" for="dame">Dame</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
@@ -79,13 +79,11 @@
 <div class="form-group">
 <label for="interesser">Interesser: </label>
 <input type="text" class="form-control" name="interesser" placeholder="Fotball, taekwondo, gaming"/>
-
 </div>
 
 <div class="form-group">
-    <button class="btn btn-primary btn-block" type="submit">Registrer</button>
-</div>
-
+    <button class="btn btn-primary btn-block" name="submit" type="submit">Registrer</button>
+  </div>
 </div>
 </div>
 </div>
@@ -93,61 +91,148 @@
 </div>
 </form>
 
+
+
 <?php
-echo "<p> ". $_GET['fornavn'] ." </p>";
 
 $medlem = array();
 $ikkeutfylt = array();
 
-if (!empty($_GET['fornavn'])) {
-  array_push($medlem, $_GET['fornavn']);
+if (!empty($_POST['fornavn'])) {
+  $medlem['fornavn'] = $_POST['fornavn'];
 } else{
   array_push($ikkeutfylt, $verdi="Fornavn");
 }
-if (!empty($_GET['etternavn'])) {
-  array_push($medlem, $_GET['etternavn']);
+if (!empty($_POST['etternavn'])) {
+  $medlem['etternavn'] = $_POST['etternavn'];
 } else{
   array_push($ikkeutfylt, $verdi="Etternavn");
 }
-if (!empty($_GET['mobilnummer'])) {
-  array_push($medlem, $_GET['mobilnummer']);
+if (!empty($_POST['mobilnummer'])) {
+  $medlem['mobilnummer'] = $_POST['mobilnummer'];
 } else{
   array_push($ikkeutfylt, $verdi="Mobilnummer");
 }
-if (!empty($_GET['dato'])) {
-  array_push($medlem, $_GET['dato']);
+if (!empty($_POST['dato'])) {
+  $medlem['dato'] = $_POST['dato'];
 } else{
   array_push($ikkeutfylt, $verdi="Fødselsdato");
 }
-if (!empty($_GET['kjonn'])) {
-  array_push($medlem, $_GET['kjonn']);
+if (!empty($_POST['kjonn'])) {
+  $medlem['kjonn'] = $_POST['kjonn'];
 } else{
   array_push($ikkeutfylt, $verdi="Kjønn");
 }
-if (!empty($_GET['gateadresse'])) {
-  array_push($medlem, $_GET['gateadresse']);
+if (!empty($_POST['gateadresse'])) {
+  $medlem['gateadresse'] = $_POST['gateadresse'];
 } else{
   array_push($ikkeutfylt, $verdi="Gateadresse");
 }
-if (!empty($_GET['postnummer'])) {
-  array_push($medlem, $_GET['postnummer']);
+if (!empty($_POST['postnummer'])) {
+  $medlem['postnummer'] = $_POST['postnummer'];
 } else{
   array_push($ikkeutfylt, $verdi="Postnummer");
 }
-if (!empty($_GET['poststed'])) {
-  array_push($medlem, $_GET['poststed']);
+if (!empty($_POST['poststed'])) {
+  $medlem['poststed'] = $_POST['poststed'];
 } else{
   array_push($ikkeutfylt, $verdi="Poststed");
 }
 
 
 
-if(!empty($ikkeutfylt)){
+if(!empty($ikkeutfylt) && isset($_POST['submit'])){
   echo 'Følgende felt mangler verdi: ' .  implode(", ", $ikkeutfylt);
-} else {
-  echo "Medlem har blitt registrert med følgende opplysninger:\n" . implode(", ", $medlem);
+} 
+elseif (isset($_POST['submit']) && !empty($medlem)) {
+  $medlem['medlemsnr'] = random_int(1000000, 9999999);
+  $medlem['kontigent'] = "ikke betalt";
+  $medlem['innmeldt'] = date("d.m.Y");
+
+  echo '
+  <div class="medlembakgrunn">
+  <div class="medlemdata">
+    <h3>Nytt medlem har blitt registrert:</h3>
+    <br>
+    <h4>Personalia: </h4>
+    <div class="datafelt">
+    <label for="fornavn">Fornavn: </label>
+    <span id="fornavn">'. $medlem['fornavn'] .
+   '</span>
+   </div>
+
+   <div class="datafelt">
+   <label for="etternavn">Etternavn: </label>
+   <span id="etternavn">'. $medlem['etternavn'] .
+  '</span>
+  </div>
+
+ <div class="datafelt">
+ <label for="mobilnummer">Mobilnummer: </label>
+ <span id="mobilnummer">'. $medlem['mobilnummer'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="dato">Fødselsdato: </label>
+ <span id="dato">'. $medlem['dato'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="kjonn">Kjønn: </label>
+ <span id="kjonn">'. $medlem['kjonn'] .
+'</span>
+</div>
+
+<br>
+<h4>Medlemsopplysninger: </h4>
+
+<div class="datafelt">
+ <label for="medlemsnr">Medlemsnummer: </label>
+ <span id="medlemsnr">'. $medlem['medlemsnr'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="kontigent">Kontigentstatus: </label>
+ <span id="kontigent">'. $medlem['kontigent'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="innmeldt">Dato for innmelding: </label>
+ <span id="innmeldt">'. $medlem['innmeldt'] .
+'</span>
+</div>
+
+<br>
+<h4>Adresse: </h4>
+<div class="datafelt">
+ <label for="postnummer">Gateadresse: </label>
+ <span id="postnummer">'. $medlem['gateadresse'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="postnummer">Postnummer: </label>
+ <span id="postnummer">'. $medlem['postnummer'] .
+'</span>
+</div>
+
+<div class="datafelt">
+ <label for="poststed">Poststed: </label>
+ <span id="poststed">'. $medlem['poststed'] .
+'</span>
+</div>
+
+
+
+</div>
+</div>'; 
 }
 ?>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
