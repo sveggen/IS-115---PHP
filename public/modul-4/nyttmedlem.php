@@ -14,53 +14,26 @@
 <?php
 
 $medlem = array();
-$ikkeutfylt = array();
 
-if(isset($_POST['submit'])){
+function bool_verdier(){
+  if (!empty($_POST['fornavn']) && !empty($_POST['etternavn']) 
+  && !empty($_POST['epost']) && !empty($_POST['mobilnummer']) 
+  && !empty($_POST['dato']) && !empty($_POST['kjonn']) 
+  && !empty($_POST['gateadresse']) && !empty($_POST['postnummer'])
+  && !empty($_POST['poststed']) && !empty($_POST['interesser'])){
+    return true;
+  }
+}
 
-if (!empty($_POST['fornavn'])) {
+if (isset($_POST['submit']) && bool_verdier() == true) {
   $medlem['fornavn'] = $_POST['fornavn'];
-} else{
-  array_push($ikkeutfylt, $verdi="Fornavn");
-}
-if (!empty($_POST['etternavn'])) {
   $medlem['etternavn'] = $_POST['etternavn'];
-} else{
-  array_push($ikkeutfylt, $verdi="Etternavn");
-}
-if (!empty($_POST['mobilnummer'])) {
-  $medlem['mobilnummer'] = $_POST['mobilnummer'];
-} else{
-  array_push($ikkeutfylt, $verdi="Mobilnummer");
-}
-if (!empty($_POST['dato'])) {
+  $medlem['epost'] = $_POST['epost'];
   $medlem['dato'] = $_POST['dato'];
-} else{
-  array_push($ikkeutfylt, $verdi="Fødselsdato");
-}
-if (!empty($_POST['kjonn'])) {
   $medlem['kjonn'] = $_POST['kjonn'];
-} else{
-  array_push($ikkeutfylt, $verdi="Kjønn");
-}
-if (!empty($_POST['gateadresse'])) {
   $medlem['gateadresse'] = $_POST['gateadresse'];
-} else{
-  array_push($ikkeutfylt, $verdi="Gateadresse");
-}
-if (!empty($_POST['postnummer'])) {
   $medlem['postnummer'] = $_POST['postnummer'];
-} else{
-  array_push($ikkeutfylt, $verdi="Postnummer");
-}
-if (!empty($_POST['poststed'])) {
   $medlem['poststed'] = $_POST['poststed'];
-} else{
-  array_push($ikkeutfylt, $verdi="Poststed");
-}
-}
-
-if (isset($_POST['submit']) && empty($ikkeutfylt)) {
   $medlem['medlemsnr'] = random_int(1000000, 9999999);
   $medlem['kontigent'] = "Ikke betalt";
   $medlem['innmeldt'] = date("d.m.Y");
@@ -160,7 +133,7 @@ function goBack() {
 
 <?php
 } else {
-  if(!empty($ikkeutfylt) && isset($_POST['submit'])){
+  if(empty($_POST['gateadresse']) && isset($_POST['submit'])){
     $manglerfelt = "Følgende felt mangler: "
 ?>
 <script>
@@ -186,7 +159,9 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
  <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
- <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){?>
+ <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){
+   $mangler_verdier = true;
+   ?>
   <small class="form-text text-danger">Fyll inn et etternavn.</small>
 <?php }?>
 </div>
