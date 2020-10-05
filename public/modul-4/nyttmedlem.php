@@ -151,14 +151,16 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
-<input type="text" class="form-control" name="fornavn" placeholder="Ola"/>
+<input type="text" class="form-control" name="fornavn" placeholder="Ola"
+<?php if(!empty($_POST['fornavn'])){ echo "value=" . $_POST['fornavn'];}?> />
 <?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et fornavn.</small>
 <?php }?>
 </div>
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
- <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
+ <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"
+ <?php if(!empty($_POST['etternavn'])){ echo "value=" . $_POST['etternavn'];}?> />
  <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){
    $mangler_verdier = true;
    ?>
@@ -168,36 +170,42 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 </div>
 <div class="form-group ">
 <label for="email">Email: </label>
-<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"/>
+<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"
+<?php if(!empty($_POST['epost'])){ echo "value=" . $_POST['epost'];}?> />
 <?php if (empty($_POST['epost']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en gyldig epostadresse.</small>
 <?php }?>
 </div>
 <div class="form-group">
 <label for="mobilnummer">Mobilnummer: </label>
-<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"/>
+<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"
+<?php if(!empty($_POST['mobilnummer'])){ echo "value=" . $_POST['mobilnummer'];}?> />
 <?php if (empty($_POST['mobilnummer']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et mobilnummer med 8 tall.</small>
 <?php }?>
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" />
+<input type="date" class="form-control" name="dato" 
+<?php if(!empty($_POST['dato'])){ echo "value=" . $_POST['dato'];}?> />
 <?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
 <?php }?>
 </div>
 <div class="form-group">
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input">
+  <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input"
+  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "mann"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="mann">Mann</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input">
+  <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input"
+  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "dame"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="dame">Dame</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
+  <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input"
+  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "annet"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="annet">Annet</label>
 </div>
 <?php if (empty($_POST['kjonn']) && isset($_POST['submit'])){?>
@@ -207,26 +215,30 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-row">
 <div class="form-group ">
 <label for="gateadresse">Gateadresse: </label>
-<input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"/>
+<input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"
+<?php if(!empty($_POST['gateadresse'])){ echo "value=" . $_POST['gateadresse'];}?> />
 <?php if (empty($_POST['gateadresse']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en gateadresse.</small>
 <?php }?>
 </div>
 <div class="form-group ">
 <label for="postnummer">Postnummer: </label>
-<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" placeholder="1321"/>
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" placeholder="1431"
+<?php if(!empty($_POST['postnummer'])){ echo "value=" . $_POST['postnummer'];}?> />
 <?php if (empty($_POST['postnummer']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et gyldig postnummer.</small>
 <?php }?>
 </div>
 <div class="form-group "> 
 <label for="poststed">Poststed: </label>  
-<input type="text" class="form-control" name="poststed" placeholder="Stabekk"/>
+<input type="text" class="form-control" name="poststed" placeholder="Stabekk"
+<?php if(!empty($_POST['poststed'])){ echo "value=" . $_POST['poststed'];}?> />
 <?php if (empty($_POST['poststed']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et poststed.</small>
 <?php }?>
 </div>
 </div>
+
 <div class="form-group "> 
 <label for="checkboxes">Interesser:</label>
 <div class="checkboxes">
@@ -278,7 +290,7 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-group"> 
 <label for="kursaktiviteter">Kursaktiviteter:</label>
 <select name="kursaktiviteter[]" class="form-control kurs-select" multiple>
-    <option value="klatrekurs">Klatrekurs</option>
+  <option value="klatrekurs">Klatrekurs</option>
     <option value="lederkurs">Lederkurs</option>
     <option value="gitarkurs">Gitarkurs</option>
     <option value="matlagingskurs">Matlagingskurs</option>
@@ -286,7 +298,6 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
     <option value="sminkekurs">Sminkekurs</option>
 </select>
 </div>
-
 <div class="form-group">
     <button class="btn btn-primary btn-block" name="submit" type="submit">Registrer</button>
   </div>
