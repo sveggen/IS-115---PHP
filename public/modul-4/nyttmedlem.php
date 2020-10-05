@@ -1,6 +1,5 @@
 <!-- Oppgave 4 -->
 
-
 <html>
 <head>
 <meta charset="utf-8">
@@ -102,23 +101,6 @@ if (isset($_POST['submit']) && empty($ikkeutfylt)) {
 </span>
 </div>
 <br>
-<h4>Medlemsopplysninger: </h4>
-<div class="datafelt">
- <label for="medlemsnr">Medlemsnummer: </label>
- <span id="medlemsnr"><?php echo $medlem['medlemsnr'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="kontigent">Kontigentstatus: </label>
- <span id="kontigent"><?php echo $medlem['kontigent'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="innmeldt">Dato for innmelding: </label>
- <span id="innmeldt"><?php echo $medlem['innmeldt'] ?>
-</span>
-</div>
-<br>
 <h4>Adresse: </h4>
 <div class="datafelt">
  <label for="postnummer">Gateadresse: </label>
@@ -135,15 +117,36 @@ if (isset($_POST['submit']) && empty($ikkeutfylt)) {
  <span id="poststed"><?php echo $medlem['poststed'] ?>
 </span>
 </div>
+<br>
+<h4>Medlemsopplysninger: </h4>
 <div class="datafelt">
- <label for="interesser">Interesser: </label>
- <span id="interesser"><?php echo implode(", ", $medlem['interesser']) ?>
+ <label for="medlemsnr">Medlemsnummer: </label>
+ <span id="medlemsnr"><?php echo $medlem['medlemsnr'] ?>
+</span>
+</div>
+<div class="datafelt">
+ <label for="kontigent">Kontigentstatus: </label>
+ <span id="kontigent"><?php echo $medlem['kontigent'] ?>
+</span>
+</div>
+<div class="datafelt">
+ <label for="innmeldt">Dato for innmelding: </label>
+ <span id="innmeldt"><?php echo $medlem['innmeldt'] ?>
 </span>
 </div>
 <div class="datafelt">
  <label for="kursaktiviteter">Kursaktiviteter: </label>
  <span id="kursaktiviteter"><?php if (isset($medlem['kursaktiviteter'])){ 
-   echo implode(", ", $medlem['kursaktiviteter']);} ?>
+   echo implode(", ", $medlem['kursaktiviteter']);
+   } else {
+     echo "Ingen kurs registrert";
+   }
+  ?>
+</span> 
+</div>
+<div class="datafelt">
+ <label for="interesser">Interesser: </label>
+ <span id="interesser"><?php echo implode(", ", $medlem['interesser']) ?>
 </span>
 </div>
 <button class="btn btn-primary btn-block" onclick="goBack()">Gå tilbake</button>
@@ -152,15 +155,19 @@ function goBack() {
   window.history.back();
 }
 </script>
-
 </div>
 </div>
 
 <?php
 } else {
   if(!empty($ikkeutfylt) && isset($_POST['submit'])){
-    echo '<div class="feilmelding">Følgende felt mangler verdi: ' .  implode(", ", $ikkeutfylt) . '</div>';
-  } 
+    $manglerfelt = "Følgende felt mangler: "
+?>
+<script>
+alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
+</script>
+<?php
+  }
 ?>
 
 <div class="registrer-medlem">
@@ -172,25 +179,40 @@ function goBack() {
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
 <input type="text" class="form-control" name="fornavn" placeholder="Ola"/>
+<?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn et fornavn.</small>
+<?php }?>
 </div>
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
  <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
+ <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn et etternavn.</small>
+<?php }?>
 </div>
 </div>
 <div class="form-group ">
 <label for="email">Email: </label>
 <input type="email" class="form-control" name="epost" placeholder="ola@mail.no"/>
+<?php if (empty($_POST['epost']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn en gyldig epostadresse.</small>
+<?php }?>
 </div>
 <div class="form-group">
 <label for="mobilnummer">Mobilnummer: </label>
 <input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"/>
+<?php if (empty($_POST['mobilnummer']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn et mobilnummer med 8 tall.</small>
+<?php }?>
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
 <input type="date" class="form-control" name="dato" />
+<?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
+<?php }?>
 </div>
-<div class="form-group col">
+<div class="form-group">
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input">
   <label class="custom-control-label" for="mann">Mann</label>
@@ -203,19 +225,31 @@ function goBack() {
   <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
   <label class="custom-control-label" for="annet">Annet</label>
 </div>
+<?php if (empty($_POST['kjonn']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Velg ditt kjønn.</small>
+<?php }?>
 </div>
 <div class="form-row">
 <div class="form-group ">
 <label for="gateadresse">Gateadresse: </label>
 <input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"/>
+<?php if (empty($_POST['gateadresse']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn en gateadresse.</small>
+<?php }?>
 </div>
 <div class="form-group ">
 <label for="postnummer">Postnummer: </label>
-<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required placeholder="1321"/>
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" placeholder="1321"/>
+<?php if (empty($_POST['postnummer']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn et gyldig postnummer.</small>
+<?php }?>
 </div>
 <div class="form-group "> 
 <label for="poststed">Poststed: </label>  
 <input type="text" class="form-control" name="poststed" placeholder="Stabekk"/>
+<?php if (empty($_POST['poststed']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Fyll inn et poststed.</small>
+<?php }?>
 </div>
 </div>
 <div class="form-group "> 
@@ -261,6 +295,9 @@ function goBack() {
     <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke">
     <label class="form-check-label" for="sminke">Sminke</label>
 </div>
+<?php if (empty($_POST['interesser']) && isset($_POST['submit'])){?>
+  <small class="form-text text-danger">Velg minst en interesse.</small>
+<?php }?>
 </div>
 </div>
 <div class="form-group"> 
@@ -288,7 +325,6 @@ function goBack() {
 <?php
 }
 ?>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
