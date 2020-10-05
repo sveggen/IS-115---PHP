@@ -11,92 +11,13 @@
 </head>
 <body>
 <div class="bakgrunn">
-<div class="registrer-medlem">
-<form action="" method="post">
-
-  <div class="form-group">
-<h3>Registrere nytt medlem</h3>
-  </div>
-<div class="form-row">
-<div class="form-group">
-<label for="fornavn">Fornavn: </label>
-<input type="text" class="form-control" name="fornavn" placeholder="Ola"/>
-</div>
-
-<div class="form-group ">
-<label for="etternavn">Etternavn: </label>
- <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
-</div>
-</div>
-
-<div class="form-group ">
-<label for="email">Email: </label>
-<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"/>
-</div>
-
-<div class="form-group">
-<label for="mobilnummer">Mobilnummer: </label>
-<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"/>
-</div>
-
-<div class="form-group">
-<label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" />
-</div>
-
-<div class="form-group col">
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input">
-  <label class="custom-control-label" for="mann">Mann</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input">
-  <label class="custom-control-label" for="dame">Dame</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
-  <label class="custom-control-label" for="annet">Annet</label>
-</div>
-</div>
-
-<div class="form-row">
-<div class="form-group ">
-<label for="gateadresse">Gateadresse: </label>
-<input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"/>
-</div>
-
-<div class="form-group ">
-<label for="postnummer">Postnummer: </label>
-<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required placeholder="1321"/>
-</div>
-
-<div class="form-group ">
-<label for="poststed">Poststed: </label>  
-<input type="text" class="form-control" name="poststed" placeholder="Stabekk"/>
-</div>
-</div>
-
-<div class="form-group">
-<label for="interesser">Interesser: </label>
-<input type="text" class="form-control" name="interesser" placeholder="Fotball, taekwondo, gaming"/>
-</div>
-
-<div class="form-group">
-    <button class="btn btn-primary btn-block" name="submit" type="submit">Registrer</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</form>
-
-
 
 <?php
 
 $medlem = array();
 $ikkeutfylt = array();
+
+if(isset($_POST['submit'])){
 
 if (!empty($_POST['fornavn'])) {
   $medlem['fornavn'] = $_POST['fornavn'];
@@ -138,18 +59,18 @@ if (!empty($_POST['poststed'])) {
 } else{
   array_push($ikkeutfylt, $verdi="Poststed");
 }
+}
 
-
-
-if(!empty($ikkeutfylt) && isset($_POST['submit'])){
-  echo 'Følgende felt mangler verdi: ' .  implode(", ", $ikkeutfylt);
-} 
-elseif (isset($_POST['submit']) && !empty($medlem)) {
+if (isset($_POST['submit']) && empty($ikkeutfylt)) {
   $medlem['medlemsnr'] = random_int(1000000, 9999999);
-  $medlem['kontigent'] = "ikke betalt";
+  $medlem['kontigent'] = "Ikke betalt";
   $medlem['innmeldt'] = date("d.m.Y");
+  $medlem['interesser'] = $_POST['interesser'];
+  if (isset($_POST['kursaktiviteter'])){
+    $medlem['kursaktiviteter'] = $_POST['kursaktiviteter'];
+  }
+  ?>
 
-  echo '
   <div class="medlembakgrunn">
   <div class="medlemdata">
     <h3>Nytt medlem har blitt registrert:</h3>
@@ -157,79 +78,214 @@ elseif (isset($_POST['submit']) && !empty($medlem)) {
     <h4>Personalia: </h4>
     <div class="datafelt">
     <label for="fornavn">Fornavn: </label>
-    <span id="fornavn">'. $medlem['fornavn'] .
-   '</span>
+    <span id="fornavn"><?php echo $medlem['fornavn'] ?>
+   </span>
    </div>
-
    <div class="datafelt">
    <label for="etternavn">Etternavn: </label>
-   <span id="etternavn">'. $medlem['etternavn'] .
-  '</span>
+   <span id="etternavn"><?php echo $medlem['etternavn'] ?>
+  </span>
   </div>
-
  <div class="datafelt">
  <label for="mobilnummer">Mobilnummer: </label>
- <span id="mobilnummer">'. $medlem['mobilnummer'] .
-'</span>
+ <span id="mobilnummer"><?php echo $medlem['mobilnummer'] ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="dato">Fødselsdato: </label>
- <span id="dato">'. $medlem['dato'] .
-'</span>
+ <span id="dato"><?php echo date("d.m.Y", strtotime($medlem['dato'])) ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="kjonn">Kjønn: </label>
- <span id="kjonn">'. $medlem['kjonn'] .
-'</span>
+ <span id="kjonn"><?php echo ucfirst($medlem['kjonn']) ?>
+</span>
 </div>
-
 <br>
 <h4>Medlemsopplysninger: </h4>
-
 <div class="datafelt">
  <label for="medlemsnr">Medlemsnummer: </label>
- <span id="medlemsnr">'. $medlem['medlemsnr'] .
-'</span>
+ <span id="medlemsnr"><?php echo $medlem['medlemsnr'] ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="kontigent">Kontigentstatus: </label>
- <span id="kontigent">'. $medlem['kontigent'] .
-'</span>
+ <span id="kontigent"><?php echo $medlem['kontigent'] ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="innmeldt">Dato for innmelding: </label>
- <span id="innmeldt">'. $medlem['innmeldt'] .
-'</span>
+ <span id="innmeldt"><?php echo $medlem['innmeldt'] ?>
+</span>
 </div>
-
 <br>
 <h4>Adresse: </h4>
 <div class="datafelt">
  <label for="postnummer">Gateadresse: </label>
- <span id="postnummer">'. $medlem['gateadresse'] .
-'</span>
+ <span id="postnummer"><?php echo $medlem['gateadresse'] ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="postnummer">Postnummer: </label>
- <span id="postnummer">'. $medlem['postnummer'] .
-'</span>
+ <span id="postnummer"><?php echo $medlem['postnummer'] ?>
+</span>
 </div>
-
 <div class="datafelt">
  <label for="poststed">Poststed: </label>
- <span id="poststed">'. $medlem['poststed'] .
-'</span>
+ <span id="poststed"><?php echo $medlem['poststed'] ?>
+</span>
+</div>
+<div class="datafelt">
+ <label for="interesser">Interesser: </label>
+ <span id="interesser"><?php echo implode(", ", $medlem['interesser']) ?>
+</span>
+</div>
+<div class="datafelt">
+ <label for="kursaktiviteter">Kursaktiviteter: </label>
+ <span id="kursaktiviteter"><?php if (isset($medlem['kursaktiviteter'])){ 
+   echo implode(", ", $medlem['kursaktiviteter']);} ?>
+</span>
+</div>
+<button class="btn btn-primary btn-block" onclick="goBack()">Gå tilbake</button>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</div>
 </div>
 
+<?php
+} else {
+  if(!empty($ikkeutfylt) && isset($_POST['submit'])){
+    echo '<div class="feilmelding">Følgende felt mangler verdi: ' .  implode(", ", $ikkeutfylt) . '</div>';
+  } 
+?>
 
-
+<div class="registrer-medlem">
+<form action="" method="post">
+  <div class="form-group">
+<h3>Registrere nytt medlem</h3>
+  </div>
+<div class="form-row">
+<div class="form-group">
+<label for="fornavn">Fornavn: </label>
+<input type="text" class="form-control" name="fornavn" placeholder="Ola"/>
 </div>
-</div>'; 
+<div class="form-group ">
+<label for="etternavn">Etternavn: </label>
+ <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"/>
+</div>
+</div>
+<div class="form-group ">
+<label for="email">Email: </label>
+<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"/>
+</div>
+<div class="form-group">
+<label for="mobilnummer">Mobilnummer: </label>
+<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"/>
+</div>
+<div class="form-group">
+<label for="dato">Fødselsdato: </label>
+<input type="date" class="form-control" name="dato" />
+</div>
+<div class="form-group col">
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input">
+  <label class="custom-control-label" for="mann">Mann</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input">
+  <label class="custom-control-label" for="dame">Dame</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input">
+  <label class="custom-control-label" for="annet">Annet</label>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group ">
+<label for="gateadresse">Gateadresse: </label>
+<input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"/>
+</div>
+<div class="form-group ">
+<label for="postnummer">Postnummer: </label>
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" required placeholder="1321"/>
+</div>
+<div class="form-group "> 
+<label for="poststed">Poststed: </label>  
+<input type="text" class="form-control" name="poststed" placeholder="Stabekk"/>
+</div>
+</div>
+<div class="form-group "> 
+<label for="checkboxes">Interesser:</label>
+<div class="checkboxes">
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="ballsport">
+    <label class="form-check-label" for="ballsport">Ballsport</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="dans">
+    <label class="form-check-label" for="dans">Dans</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke">
+    <label class="form-check-label" for="sminke">Sminke</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="programmering">
+    <label class="form-check-label" for="programmering">Programmering</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="klatring">
+    <label class="form-check-label" for="klatring">Klatring</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" id="gaming">
+    <label class="form-check-label" for="gaming">Gaming</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="musikk">
+    <label class="form-check-label" for="musikk">Musikk</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="matlaging">
+    <label class="form-check-label" for="matlaging">Matlaging</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="trening">
+    <label class="form-check-label" for="trening">Trening</label>
+</div>
+<div class="form-check form-check-inline">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke">
+    <label class="form-check-label" for="sminke">Sminke</label>
+</div>
+</div>
+</div>
+<div class="form-group"> 
+<label for="kursaktiviteter">Kursaktiviteter:</label>
+<select name="kursaktiviteter[]" class="form-control kurs-select" multiple>
+    <option value="klatrekurs">Klatrekurs</option>
+    <option value="lederkurs">Lederkurs</option>
+    <option value="gitarkurs">Gitarkurs</option>
+    <option value="matlagingskurs">Matlagingskurs</option>
+    <option value="sangkurs">Sangkurs</option>
+    <option value="sminkekurs">Sminkekurs</option>
+</select>
+</div>
+
+<div class="form-group">
+    <button class="btn btn-primary btn-block" name="submit" type="submit">Registrer</button>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<?php
 }
 ?>
 
