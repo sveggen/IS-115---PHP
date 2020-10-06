@@ -1,4 +1,5 @@
 <!-- Oppgave 5 -->
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -8,6 +9,30 @@
 <link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
+
+<?php
+$medlem = array(
+  "fornavn" => "Markus",
+   "etternavn" => "Sveggen", 
+   "mobilnummer" => 98121102, 
+   "dato" =>  date("09-08-2019"), 
+   "kjonn" => "Mann", 
+   "medlemsnr" => 123139,
+   "kontigent" => "betalt",
+   "innmeldt" => date("02-12-2017"),
+   "gateadresse" => "Fjellveien 12",
+   "postnummer" => "4563",
+   "poststed" => "Kristiansand",
+   "interesser" => array(
+     "klatring",
+     "gaming"
+    ),
+   "kursaktiviteter" => array(
+     "lederkurs"
+   )
+  );
+?>
+
 <div class="bakgrunn">
 <div class="medlembakgrunn">
   <div class="medlemdata">
@@ -16,7 +41,7 @@
     <h4>Personalia: </h4>
     <div class="datafelt">
     <label for="fornavn">Fornavn: </label>
-    <span id="fornavn"><?php echo $medlem['fornavn'] ?>
+    <span id="fornavn" onclick="editField('fornavn')"><?php echo $medlem['fornavn'] ?>
    </span>
    </div>
    <div class="datafelt">
@@ -53,14 +78,14 @@
 </div>
 <div class="datafelt">
  <label for="innmeldt">Dato for innmelding: </label>
- <span id="innmeldt"><?php echo $medlem['innmeldt'] ?>
+ <span id="innmeldt"><?php echo date("d.m.Y", strtotime($medlem['innmeldt'])) ?>
 </span>
 </div>
 <br>
 <h4>Adresse: </h4>
 <div class="datafelt">
- <label for="postnummer">Gateadresse: </label>
- <span id="postnummer"><?php echo $medlem['gateadresse'] ?>
+ <label for="gateadresse">Gateadresse: </label>
+ <span id="gateadresse"><?php echo $medlem['gateadresse'] ?>
 </span>
 </div>
 <div class="datafelt">
@@ -75,19 +100,27 @@
 </div>
 <div class="datafelt">
  <label for="interesser">Interesser: </label>
- <span id="interesser"><?php echo "hei"; ?>
+ <span id="interesser"><?php echo implode(", ", $medlem['interesser']) ?>
 </span>
 </div>
 <div class="datafelt">
  <label for="kursaktiviteter">Kursaktiviteter: </label>
- <span id="kursaktiviteter"><?php echo "hei"; ?>
-</span>
+ <span id="kursaktiviteter"><?php if (isset($medlem['kursaktiviteter'])){ 
+   echo implode(", ", $medlem['kursaktiviteter']);
+   } else {
+     echo "Ingen kurs registrert";
+   }
+  ?>
+</span> 
 </div>
 <button class="btn btn-primary btn-block" onclick="goBack()">Endre medlem</button>
 </div>
 </div>
 
+<script>
 
+
+</script>
 
 <?php
 

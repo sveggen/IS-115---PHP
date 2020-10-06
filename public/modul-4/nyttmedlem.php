@@ -97,7 +97,7 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
 </div>
 <div class="datafelt">
  <label for="innmeldt">Dato for innmelding: </label>
- <span id="innmeldt"><?php echo $medlem['innmeldt'] ?>
+ <span id="innmeldt"><?php echo date("d.m.Y", strtotime($medlem['innmeldt'])) ?>
 </span>
 </div>
 <div class="datafelt">
@@ -126,6 +126,15 @@ function goBack() {
 
 <?php
 } else {
+
+function setVerdi($felt){
+  $value = "";
+  if (!empty($_POST[$felt])){
+    $value = "value =" . $_POST[$felt];
+  } 
+  echo (string) $value;
+}
+
 ?>
 <div class="registrer-medlem">
 <form action="" method="post">
@@ -135,16 +144,14 @@ function goBack() {
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
-<input type="text" class="form-control" name="fornavn" placeholder="Ola"
-<?php if(!empty($_POST['fornavn'])){ echo "value=" . $_REQUEST['fornavn'];}?> />
+<input type="text" class="form-control" name="fornavn" placeholder="Ola" <?php setVerdi("fornavn")?> />
 <?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et fornavn.</small>
 <?php }?>
 </div>
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
- <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"
- <?php if(!empty($_POST['etternavn'])){ echo "value=" . $_POST['etternavn'];}?> />
+ <input type="text" class="form-control" name="etternavn" placeholder="Nordmann" <?php setVerdi("etternavn")?> />
  <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){
    $mangler_verdier = true;
    ?>
@@ -154,24 +161,21 @@ function goBack() {
 </div>
 <div class="form-group ">
 <label for="email">Email: </label>
-<input type="email" class="form-control" name="epost" placeholder="ola@mail.no"
-<?php if(!empty($_POST['epost'])){ echo "value=" . $_POST['epost'];}?> />
+<input type="email" class="form-control" name="epost" placeholder="ola@mail.no" <?php setVerdi("epost")?> />
 <?php if (empty($_POST['epost']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en gyldig epostadresse.</small>
 <?php }?>
 </div>
 <div class="form-group">
 <label for="mobilnummer">Mobilnummer: </label>
-<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678"
-<?php if(!empty($_POST['mobilnummer'])){ echo "value=" . $_POST['mobilnummer'];}?> />
+<input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}" placeholder="12345678" <?php setVerdi("mobilnummer")?> />
 <?php if (empty($_POST['mobilnummer']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et mobilnummer med 8 tall.</small>
 <?php }?>
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" 
-<?php if(!empty($_POST['dato'])){ echo "value=" . $_POST['dato'];}?> />
+<input type="date" class="form-control" name="dato" <?php date("MM-DD-YYYY", strtotime(setVerdi("dato")))?>/>
 <?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
 <?php }?>
@@ -207,79 +211,101 @@ function goBack() {
 </div>
 <div class="form-group ">
 <label for="postnummer">Postnummer: </label>
-<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" placeholder="1431"
-<?php if(!empty($_POST['postnummer'])){ echo "value=" . $_POST['postnummer'];}?> />
+<input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}" placeholder="1431" <?php setVerdi("postnummer")?> />
 <?php if (empty($_POST['postnummer']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et gyldig postnummer.</small>
 <?php }?>
 </div>
 <div class="form-group "> 
 <label for="poststed">Poststed: </label>  
-<input type="text" class="form-control" name="poststed" placeholder="Stabekk"
-<?php if(!empty($_POST['poststed'])){ echo "value=" . $_POST['poststed'];}?> />
+<input type="text" class="form-control" name="poststed" placeholder="Stabekk" <?php setVerdi("poststed")?> />
 <?php if (empty($_POST['poststed']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et poststed.</small>
 <?php }?>
 </div>
 </div>
+<?php 
+function valgteInteresser($interesse){
+  $checked = "";
+  if (isset($_POST['interesser']) && in_array($interesse ,$_POST['interesser'])){
+    $checked = "checked";
+  } else {
+    $checked = "";
+  }
+  echo (string) $checked;
+}
+?>
 
 <div class="form-group "> 
 <label for="checkboxes">Interesser:</label>
 <div class="checkboxes">
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="ballsport">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="ballsport" <?php valgteInteresser("ballsport") ?>>
     <label class="form-check-label" for="ballsport">Ballsport</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="dans">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="dans" <?php valgteInteresser("dans") ?>>
     <label class="form-check-label" for="dans">Dans</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke" <?php valgteInteresser("sminke") ?>>
     <label class="form-check-label" for="sminke">Sminke</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="programmering">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="programmering" <?php valgteInteresser("programmering") ?>>
     <label class="form-check-label" for="programmering">Programmering</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="klatring">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="klatring" <?php valgteInteresser("klatring") ?>>
     <label class="form-check-label" for="klatring">Klatring</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" id="gaming">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="gaming" <?php valgteInteresser("gaming") ?>>
     <label class="form-check-label" for="gaming">Gaming</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="musikk">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="musikk" <?php valgteInteresser("musikk") ?>>
     <label class="form-check-label" for="musikk">Musikk</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="matlaging">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="matlaging" <?php valgteInteresser("matlaging") ?>>
     <label class="form-check-label" for="matlaging">Matlaging</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="trening">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="trening" <?php valgteInteresser("trening") ?>>
     <label class="form-check-label" for="trening">Trening</label>
 </div>
 <div class="form-check form-check-inline">
-    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke">
+    <input type="checkbox" name="interesser[]" class="form-check-input" value="sminke" <?php valgteInteresser("sminke") ?>>
     <label class="form-check-label" for="sminke">Sminke</label>
 </div>
 <?php if (empty($_POST['interesser']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Velg minst en interesse.</small>
-<?php }?>
+
+<?php }
+
+function valgteKurs($kurs){
+  $selected = "";
+  if (isset($_POST['kursaktiviteter']) && in_array($kurs ,$_POST['kursaktiviteter'])){
+    $selected = "selected";
+  } else {
+    $selected = "";
+  }
+  echo (string) $selected;
+}
+?>
+
 </div>
 </div>
 <div class="form-group"> 
 <label for="kursaktiviteter">Kursaktiviteter:</label>
 <select name="kursaktiviteter[]" class="form-control kurs-select" multiple>
-  <option value="klatrekurs">Klatrekurs</option>
-    <option value="lederkurs">Lederkurs</option>
-    <option value="gitarkurs">Gitarkurs</option>
-    <option value="matlagingskurs">Matlagingskurs</option>
-    <option value="sangkurs">Sangkurs</option>
-    <option value="sminkekurs">Sminkekurs</option>
+<option <?php valgteKurs("klatrekurs") ?> value="klatrekurs">Klatrekurs</option>
+  <option <?php valgteKurs("lederkurs") ?> value="lederkurs">Lederkurs</option>
+    <option <?php valgteKurs("gitarkurs") ?> value="gitarkurs">Gitarkurs</option>
+    <option <?php valgteKurs("matlagingskurs") ?> value="matlagingskurs">Matlagingskurs</option>
+    <option <?php valgteKurs("sangkurs") ?> value="sangkurs">Sangkurs</option>
+    <option <?php echo (isset($_POST['kursaktiviteter']) && in_array('sminkekurs' ,$_POST['kursaktiviteter'])) ? "selected" : "" ?> value="sminkekurs">Sminkekurs</option>
 </select>
 </div>
 <div class="form-group">
