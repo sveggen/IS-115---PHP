@@ -177,7 +177,7 @@ function setVerdi($felt){
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" <?php date("MM-DD-YYYY", strtotime(setVerdi("dato")))?>/>
+<input type="date" class="form-control" name="dato" <?php date("YYYY-MM-DD", strtotime(setVerdi("dato")))?> placeholder/>
 <?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
 <?php }?>
