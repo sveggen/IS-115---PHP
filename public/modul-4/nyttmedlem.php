@@ -144,14 +144,16 @@ function setVerdi($felt){
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
-<input type="text" class="form-control" name="fornavn" placeholder="Ola" <?php setVerdi("fornavn")?> />
+<input type="text" class="form-control" name="fornavn" placeholder="Ola" 
+<?php echo (!empty($_POST['fornavn'])) ? ('value = "'.$_POST["fornavn"].'"') : "value = \"\"";  ?> />
 <?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et fornavn.</small>
 <?php }?>
 </div>
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
- <input type="text" class="form-control" name="etternavn" placeholder="Nordmann" <?php setVerdi("etternavn")?> />
+ <input type="text" class="form-control" name="etternavn" placeholder="Nordmann" 
+ <?php echo (!empty($_POST['etternavn'])) ? ('value = "'.$_POST["etternavn"].'"') : "value = \"\"";  ?> />
  <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){
    $mangler_verdier = true;
    ?>
