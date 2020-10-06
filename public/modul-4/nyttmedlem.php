@@ -15,7 +15,7 @@
 
 $medlem = array();
 
-function bool_verdier(){
+function alleFeltUtfylt(){
   if (!empty($_POST['fornavn']) && !empty($_POST['etternavn']) 
   && !empty($_POST['epost']) && !empty($_POST['mobilnummer']) 
   && !empty($_POST['dato']) && !empty($_POST['kjonn']) 
@@ -25,19 +25,12 @@ function bool_verdier(){
   }
 }
 
-if (isset($_POST['submit']) && bool_verdier() == true) {
-  $medlem['fornavn'] = $_POST['fornavn'];
-  $medlem['etternavn'] = $_POST['etternavn'];
-  $medlem['epost'] = $_POST['epost'];
-  $medlem['dato'] = $_POST['dato'];
-  $medlem['kjonn'] = $_POST['kjonn'];
-  $medlem['gateadresse'] = $_POST['gateadresse'];
-  $medlem['postnummer'] = $_POST['postnummer'];
-  $medlem['poststed'] = $_POST['poststed'];
+if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
+
+  $medlem += $_POST;
   $medlem['medlemsnr'] = random_int(1000000, 9999999);
   $medlem['kontigent'] = "Ikke betalt";
   $medlem['innmeldt'] = date("d.m.Y");
-  $medlem['interesser'] = $_POST['interesser'];
   if (isset($_POST['kursaktiviteter'])){
     $medlem['kursaktiviteter'] = $_POST['kursaktiviteter'];
   }
@@ -133,16 +126,7 @@ function goBack() {
 
 <?php
 } else {
-  if(empty($_POST['gateadresse']) && isset($_POST['submit'])){
-    $manglerfelt = "Følgende felt mangler: "
 ?>
-<script>
-alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
-</script>
-<?php
-  }
-?>
-
 <div class="registrer-medlem">
 <form action="" method="post">
   <div class="form-group">
@@ -152,7 +136,7 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
 <input type="text" class="form-control" name="fornavn" placeholder="Ola"
-<?php if(!empty($_POST['fornavn'])){ echo "value=" . $_POST['fornavn'];}?> />
+<?php if(!empty($_POST['fornavn'])){ echo "value=" . $_REQUEST['fornavn'];}?> />
 <?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et fornavn.</small>
 <?php }?>
@@ -216,7 +200,7 @@ alert('<?php echo $manglerfelt . implode(", ", $ikkeutfylt); ?>');
 <div class="form-group ">
 <label for="gateadresse">Gateadresse: </label>
 <input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"
-<?php if(!empty($_POST['gateadresse'])){ echo "value=" . $_POST['gateadresse'];}?> />
+<?php echo (!empty($_POST['gateadresse'])) ? ('value = "'.$_POST["gateadresse"].'"') : "value = \"\"";  ?> />
 <?php if (empty($_POST['gateadresse']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en gateadresse.</small>
 <?php }?>
