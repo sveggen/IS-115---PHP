@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
-<div style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F398949.jpg&f=1&nofb=1');">
+
+<div style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Fcold_night_mountains_hd-2560x1440.jpg&f=1&nofb=1');">
 <?php
 
 $medlem = array(
@@ -44,11 +45,6 @@ function alleFeltUtfylt(){
     }
   }
 
-if (isset($_POST['submit']) && alleFeltUtfylt() == true){
-    # for alle verdier som er satt
-    $medlem = array_replace($medlem, $_POST);
-}
-
   function setVerdi($felt){
       global $medlem;
       $value = "value =" . $medlem[$felt];
@@ -61,6 +57,22 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true){
   <div class="form-group">
 <h3>Medlemskap</h3>
   </div>
+<?php 
+
+if (isset($_POST['submit']) && alleFeltUtfylt() == true){
+  $endringer_gjort = false;
+  if ($medlem['interesser'] != $_POST['interesser'] 
+  or $medlem['kursaktiviteter'] != $_POST['kursaktiviteter']
+  or count(array_diff($medlem, $_POST)) >= 4 ){
+    $endringer_gjort = true;
+    $medlem = array_replace($medlem, $_POST);
+    echo '<small class="form-text text-success">Nye endringer ble lagret.</small><br>';
+  } else {
+    echo '<small class="form-text text-danger">Ingen nye endringer ble lagret.</small><br>';
+  }
+}
+
+?>
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
@@ -96,9 +108,9 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true){
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" <?php date("d.m.Y", strtotime(setVerdi("dato")))?> placeholder/>
+<input type="date" class="form-control" name="dato" min="1900-01-01" max="2010-01-01" <?php date("d.m.Y", strtotime(setVerdi("dato")))?> placeholder/>
 <?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
-  <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
+  <small class="form-text text-danger">Fyll inn en gyldig fødselsdato.</small>
 <?php }?>
 </div>
 <div class="form-group">
@@ -287,12 +299,34 @@ function readAndWriteOnly(){
         options[i].disabled = false;
         }
 }
-</script>
+function hide (elements) {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    elements[index].style.display = 'none';
+  }
+}
 
-<div class="form-group">
-<button type="button" onclick=readAndWriteOnly() style="background-color: #434a52" class="btn btn-primary btn-block">Endre</button>
+function show() {
+  elements = document.getElementById('submitButton');
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    elements[index].style.display = 'unset';
+  }
+}
+
+function hideAndWritable(){
+  show();
+  hide(document.getElementById('endreButton'));
+  readAndWriteOnly();
+}
+
+</script>
+<div class="form-group" id="submitButton" style="visibility: none">
 <button class="btn btn-primary btn-block" id="submitBtn" name="submit" style="background-color: green" type="submit">Lagre</button>
-  </div>
+</div>
+<div class="form-group">
+<button type="button" id="endreButton" onclick=hideAndWritable() style="background-color: #434a52" class="btn btn-primary btn-block">Endre</button> 
+</div>
 </div>
 </div>
 </div>
@@ -301,7 +335,9 @@ function readAndWriteOnly(){
 </form>
 </div>
 
-
+<script>
+hide(document.getElementById('submitButton'));
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -14,6 +14,7 @@
 
 <h1>Konkurranse</h1>
 <hr width=100%”>
+
 <form method="post" action="">
 <input name="submit" type="submit" value="Start konkurranse" class="btn btn-dark">
 </form>
@@ -26,6 +27,8 @@ if (isset($_POST['submit'])){
 }
 
 $deltakere = array("Frank" => 0, "Hans" => 0, "Oliver" => 0, "Hobbe" => 0, "Franker" => 0, "Mona" => 0);
+
+echo 'Deltakere: ' . implode(", ", array_keys($deltakere)) . '<hr width=100%”>';
 $runde = 0;
 while (count($deltakere) >= 2 && $game == true){
     echo "<h2>Runde: " . ++$runde . "\n</h2>";
