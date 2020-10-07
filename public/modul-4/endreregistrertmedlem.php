@@ -1,150 +1,85 @@
-<!-- Oppgave 4 -->
+<!-- Oppgave 5 -->
 
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Registrere nytt medlem</title>
+<title>Endre medlem</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/modul-4/style.css">
 </head>
 <body>
-<div class="bakgrunn">
 
 <?php
 
-$medlem = array();
+$medlem = array(
+  "fornavn" => "Markus",
+   "etternavn" => "Sveggen", 
+   "epost" => "m.k@gmail.com",
+   "mobilnummer" => 98121102, 
+   "dato" => "1998-12-03", 
+   "kjonn" => "mann", 
+   "medlemsnr" => 123139,
+   "kontigent" => "betalt",
+   "innmeldt" => "2010-10-10",
+   "gateadresse" => "Fjellveien 12",
+   "postnummer" => "4563",
+   "poststed" => "Kristiansand",
+   "interesser" => array(
+     "klatring",
+     "gaming"
+    ),
+   "kursaktiviteter" => array(
+     "lederkurs"
+   )
+  );
 
+# sammengligne arrays om - submit er set - alle verdier er set
+# om verdi er ny - endre verdi / oppdater array
 function alleFeltUtfylt(){
-  if (!empty($_POST['fornavn']) && !empty($_POST['etternavn']) 
-  && !empty($_POST['epost']) && !empty($_POST['mobilnummer']) 
-  && !empty($_POST['dato']) && !empty($_POST['kjonn']) 
-  && !empty($_POST['gateadresse']) && !empty($_POST['postnummer'])
-  && !empty($_POST['poststed']) && !empty($_POST['interesser'])){
-    return true;
+    if (!empty($_POST['fornavn']) && !empty($_POST['etternavn']) 
+    && !empty($_POST['epost']) && !empty($_POST['mobilnummer']) 
+    && !empty($_POST['dato']) && !empty($_POST['kjonn']) 
+    && !empty($_POST['gateadresse']) && !empty($_POST['postnummer'])
+    && !empty($_POST['poststed']) && !empty($_POST['interesser'])){
+      return true;
+    }
   }
+
+if (isset($_POST['submit']) && alleFeltUtfylt() == true){
+    # for alle verdier som er satt
+    $medlem = array_replace($medlem, $_POST);
 }
 
-if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
-  $medlem += $_POST;
-  $medlem['medlemsnr'] = random_int(1000000, 9999999);
-  $medlem['kontigent'] = "Ikke betalt";
-  $medlem['innmeldt'] = date("d.m.Y");
-  if (isset($_POST['kursaktiviteter'])){
-    $medlem['kursaktiviteter'] = $_POST['kursaktiviteter'];
+function setVerdi2($felt){
+    $value = "";
+    if (!empty($_POST[$felt])){
+      $value = "value =" . $_POST[$felt];
+    } 
+    echo (string) $value;
   }
-  ?>
 
-  <div class="medlembakgrunn">
-  <div class="medlemdata">
-    <h3>Nytt medlem har blitt registrert:</h3>
-    <br>
-    <h4>Personalia: </h4>
-    <div class="datafelt">
-    <label for="fornavn">Fornavn: </label>
-    <span id="fornavn"><?php echo $medlem['fornavn'] ?>
-   </span>
-   </div>
-   <div class="datafelt">
-   <label for="etternavn">Etternavn: </label>
-   <span id="etternavn"><?php echo $medlem['etternavn'] ?>
-  </span>
-  </div>
- <div class="datafelt">
- <label for="mobilnummer">Mobilnummer: </label>
- <span id="mobilnummer"><?php echo $medlem['mobilnummer'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="dato">Fødselsdato: </label>
- <span id="dato"><?php echo date("d.m.Y", strtotime($medlem['dato'])) ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="kjonn">Kjønn: </label>
- <span id="kjonn"><?php echo ucfirst($medlem['kjonn']) ?>
-</span>
-</div>
-<br>
-<h4>Adresse: </h4>
-<div class="datafelt">
- <label for="postnummer">Gateadresse: </label>
- <span id="postnummer"><?php echo $medlem['gateadresse'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="postnummer">Postnummer: </label>
- <span id="postnummer"><?php echo $medlem['postnummer'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="poststed">Poststed: </label>
- <span id="poststed"><?php echo $medlem['poststed'] ?>
-</span>
-</div>
-<br>
-<h4>Medlemsopplysninger: </h4>
-<div class="datafelt">
- <label for="medlemsnr">Medlemsnummer: </label>
- <span id="medlemsnr"><?php echo $medlem['medlemsnr'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="kontigent">Kontigentstatus: </label>
- <span id="kontigent"><?php echo $medlem['kontigent'] ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="innmeldt">Dato for innmelding: </label>
- <span id="innmeldt"><?php echo date("d.m.Y", strtotime($medlem['innmeldt'])) ?>
-</span>
-</div>
-<div class="datafelt">
- <label for="kursaktiviteter">Kursaktiviteter: </label>
- <span id="kursaktiviteter"><?php if (isset($medlem['kursaktiviteter'])){ 
-   echo implode(", ", $medlem['kursaktiviteter']);
-   } else {
-     echo "Ingen kurs registrert";
-   }
-  ?>
-</span> 
-</div>
-<div class="datafelt">
- <label for="interesser">Interesser: </label>
- <span id="interesser"><?php echo implode(", ", $medlem['interesser']) ?>
-</span>
-</div>
-<button class="btn btn-primary btn-block" onclick="goBack()">Gå tilbake</button>
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
-</div>
-</div>
+  function setVerdi($felt){
+      global $medlem;
+      $value = "value =" . $medlem[$felt];
+    
+    echo (string) $value;
+  }
 
-<?php
-} else {
 
-function setVerdi($felt){
-  $value = "";
-  if (!empty($_POST[$felt])){
-    $value = "value =" . $_POST[$felt];
-  } 
-  echo (string) $value;
-}
+echo print_r($medlem);
 
 ?>
 <div class="registrer-medlem">
 <form action="" method="post">
   <div class="form-group">
-<h3>Registrere nytt medlem</h3>
+<h3>Medlemskap</h3>
   </div>
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
 <input type="text" class="form-control" name="fornavn" placeholder="Ola" 
-<?php echo (!empty($_POST['fornavn'])) ? ('value = "'.$_POST["fornavn"].'"') : "value = \"\"";  ?> />
+<?php echo (!empty($medlem['fornavn'])) ? ('value = "'.$medlem["fornavn"].'"') : "value = \"\"";  ?> />
 <?php if (empty($_POST['fornavn']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn et fornavn.</small>
 <?php }?>
@@ -152,9 +87,8 @@ function setVerdi($felt){
 <div class="form-group ">
 <label for="etternavn">Etternavn: </label>
  <input type="text" class="form-control" name="etternavn" placeholder="Nordmann" 
- <?php echo (!empty($_POST['etternavn'])) ? ('value = "'.$_POST["etternavn"].'"') : "value = \"\"";  ?> />
+ <?php echo (!empty($medlem['etternavn'])) ? ('value = "'.$medlem["etternavn"].'"') : "value = \"\"";  ?> />
  <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])){
-   $mangler_verdier = true;
    ?>
   <small class="form-text text-danger">Fyll inn et etternavn.</small>
 <?php }?>
@@ -176,7 +110,7 @@ function setVerdi($felt){
 </div>
 <div class="form-group">
 <label for="dato">Fødselsdato: </label>
-<input type="date" class="form-control" name="dato" <?php date("YYYY-MM-DD", strtotime(setVerdi("dato")))?> placeholder/>
+<input type="date" class="form-control" name="dato" <?php date("d.m.Y", strtotime(setVerdi("dato")))?> placeholder/>
 <?php if (empty($_POST['dato']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
 <?php }?>
@@ -184,28 +118,25 @@ function setVerdi($felt){
 <div class="form-group">
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="mann" name="kjonn" value="mann" class="custom-control-input"
-  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "mann"){?> checked=true <?php } ?> />
+  <?php if(($medlem['kjonn']) == "mann"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="mann">Mann</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="dame" name="kjonn" value="dame" class="custom-control-input"
-  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "dame"){?> checked=true <?php } ?> />
+  <?php if(($medlem['kjonn']) == "dame"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="dame">Dame</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" id="annet" name="kjonn" value="annet" class="custom-control-input"
-  <?php if(!empty($_POST['kjonn']) && ($_POST['kjonn']) == "annet"){?> checked=true <?php } ?> />
+  <?php if(($medlem['kjonn']) == "annet"){?> checked=true <?php } ?> />
   <label class="custom-control-label" for="annet">Annet</label>
 </div>
-<?php if (empty($_POST['kjonn']) && isset($_POST['submit'])){?>
-  <small class="form-text text-danger">Velg ditt kjønn.</small>
-<?php }?>
 </div>
 <div class="form-row">
 <div class="form-group ">
 <label for="gateadresse">Gateadresse: </label>
 <input type="text" class="form-control" name="gateadresse" placeholder="Grindvegen 47"
-<?php echo (!empty($_POST['gateadresse'])) ? ('value = "'.$_POST["gateadresse"].'"') : "value = \"\"";  ?> />
+<?php echo (!empty($medlem['gateadresse'])) ? ('value = "'.$medlem["gateadresse"].'"') : "value = \"\"";  ?> />
 <?php if (empty($_POST['gateadresse']) && isset($_POST['submit'])){?>
   <small class="form-text text-danger">Fyll inn en gateadresse.</small>
 <?php }?>
@@ -227,8 +158,9 @@ function setVerdi($felt){
 </div>
 <?php 
 function valgteInteresser($interesse){
+    global $medlem;
   $checked = "";
-  if (isset($_POST['interesser']) && in_array($interesse ,$_POST['interesser'])){
+  if (isset($medlem['interesser']) && in_array($interesse ,$medlem['interesser'])){
     $checked = "checked";
   } else {
     $checked = "";
@@ -286,8 +218,9 @@ function valgteInteresser($interesse){
 <?php }
 
 function valgteKurs($kurs){
+    global $medlem;
   $selected = "";
-  if (isset($_POST['kursaktiviteter']) && in_array($kurs ,$_POST['kursaktiviteter'])){
+  if (isset($medlem['kursaktiviteter']) && in_array($kurs ,$medlem['kursaktiviteter'])){
     $selected = "selected";
   } else {
     $selected = "";
@@ -310,7 +243,7 @@ function valgteKurs($kurs){
 </select>
 </div>
 <div class="form-group">
-    <button class="btn btn-primary btn-block" name="submit" type="submit">Registrer</button>
+    <button class="btn btn-primary btn-block" name="submit" type="submit">Oppdater</button>
   </div>
 </div>
 </div>
@@ -318,10 +251,6 @@ function valgteKurs($kurs){
 </div>
 </div>
 </form>
-
-<?php
-}
-?>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

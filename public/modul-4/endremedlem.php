@@ -31,7 +31,9 @@ $medlem = array(
      "lederkurs"
    )
   );
+ echo print_r($medlem);
 ?>
+
 
 <div class="bakgrunn">
 <div class="medlembakgrunn">
