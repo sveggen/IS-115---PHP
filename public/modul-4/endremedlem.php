@@ -57,8 +57,8 @@ function alleFeltUtfylt(){
   <div class="form-group">
 <h3>Medlemskap</h3>
   </div>
-<?php 
 
+<?php 
 if (isset($_POST['submit']) && alleFeltUtfylt() == true){
   $endringer_gjort = false;
   if ($medlem['interesser'] != $_POST['interesser'] 
@@ -71,8 +71,8 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true){
     echo '<small class="form-text text-danger">Ingen nye endringer ble lagret.</small><br>';
   }
 }
-
 ?>
+
 <div class="form-row">
 <div class="form-group">
 <label for="fornavn">Fornavn: </label>
@@ -154,6 +154,7 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true){
 <?php }?>
 </div>
 </div>
+
 <?php 
 function valgteInteresser($interesse){
     global $medlem;
@@ -325,7 +326,7 @@ function hideAndWritable(){
 <button class="btn btn-primary btn-block" id="submitBtn" name="submit" style="background-color: green" type="submit">Lagre</button>
 </div>
 <div class="form-group">
-<button type="button" id="endreButton" onclick=hideAndWritable() style="background-color: #434a52" class="btn btn-primary btn-block">Endre</button> 
+<button type="button" id="endreButton" onclick=hideAndWritable() class="btn btn-primary btn-block">Endre</button> 
 </div>
 </div>
 </div>
