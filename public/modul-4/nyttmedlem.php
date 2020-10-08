@@ -30,9 +30,6 @@ if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
   $medlem['medlemsnr'] = random_int(1000000, 9999999);
   $medlem['kontigent'] = "Ikke betalt";
   $medlem['innmeldt'] = date("d.m.Y");
-  if (isset($_POST['kursaktiviteter'])){
-    $medlem['kursaktiviteter'] = $_POST['kursaktiviteter'];
-  }
   ?>
 
   <div class="medlembakgrunn">
@@ -123,7 +120,8 @@ function goBack() {
 </div>
 </div>
 
-<?php
+<?
+# om ikke alle felt har blitt fylt ut riktig
 } else {
 
 function setVerdi($felt){
