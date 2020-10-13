@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: container-build/web/Dockerfile
+    hostname: "foobar"
     environment:
     - MYSQL_DATABASE=ergotests
     - MYSQL_USER=bacit

@@ -19,14 +19,36 @@
 $etternavn = $_GET['etternavn'];
 $submit = $_GET['submit'];
 
-if (!empty($etternavn)) {
-    $etternavn = ucfirst(strtolower($etternavn));
-    $lengde = strlen($etternavn);
-    echo "Etternavn lagret: {$etternavn} med {$lengde} bokstaver";
-} elseif (isset($submit) && empty($etternavn)) {
-    echo "ingen navn oppført";
+/**
+ * Konverter streng uavhengig format til små bokstaver.
+ */
+function strotolower_world($str){
+    return mb_convert_case($str, MB_CASE_LOWER);
 }
 
+/**
+ * Konverter første bokstav i hvert ord i
+ * streng uavhengig format til stor bokstav.
+ */
+function ucfirst_world($str){
+    return mb_convert_case($str, MB_CASE_TITLE);
+}
+
+/**
+ * Teller antall bokstaver i streng uavhengig format
+ * og teller ikke med mellomrom og bindestrek.
+ */
+function strlength_world($str){
+    return mb_strlen(str_replace(array(" ", "-"), "", $str));
+}
+
+if (!empty($etternavn)) {
+    $converted_str = ucfirst_world(strotolower_world($etternavn));
+    echo "Etternavn:" . $converted_str . "<br> Antall bokstaver: " . strlength_world($etternavn);
+
+} elseif (isset($submit) && empty($etternavn)) {
+    echo "Ingen etternavn fylt inn";
+}
 ?>
 
 </body>
