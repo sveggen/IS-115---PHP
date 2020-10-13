@@ -17,7 +17,6 @@
 
 <?php
 $etternavn = $_GET['etternavn'];
-$submit = $_GET['submit'];
 
 /**
  * Konverter streng uavhengig format til små bokstaver.

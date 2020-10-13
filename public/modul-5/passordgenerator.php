@@ -17,7 +17,23 @@
         </div>
 <?php
 
-echo $_GET['etternavn'];
+if (!empty($_GET['etternavn']) && isset($_GET['submit'])){
+
+    $etternavn = $_GET['etternavn'];
+    $hash = md5($etternavn);
+
+    $passordlengde = 8;
+    $hashlengde = strlen($hash);
+
+    # Startposisjon i hashet verdi
+    $start = rand(0, ($hashlengde - $passordlengde - 1));
+
+    # Echo'er 8 tegn av av hashet verdi. 
+    echo "Etternavn: " . $etternavn . "<br>";
+    echo "Foreslått passord: " . $passord = substr($hash, $start, $passordlengde);
+} else {
+    echo "Ingen etternavn fylt inn";
+}
 
 ?>
 
