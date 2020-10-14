@@ -43,7 +43,7 @@ function strlength_world($str){
 
 if (!empty($etternavn)) {
     $converted_str = ucfirst_world(strotolower_world($etternavn));
-    echo "Etternavn:" . $converted_str . "<br> Antall bokstaver: " . strlength_world($etternavn);
+    echo "Etternavn: " . $converted_str . "<br> Antall bokstaver: " . strlength_world($etternavn);
 
 } elseif (isset($submit) && empty($etternavn)) {
     echo "Ingen etternavn fylt inn";
