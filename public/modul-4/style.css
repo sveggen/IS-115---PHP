@@ -1,11 +1,12 @@
 body {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 .bakgrunn {
-  background: #475d62 url(https://blueridgemountainlife.com/wp-content/gallery/linn-cove-viaduct/1IMG_6787.jpg);
+  background: #475d62
+    url(https://blueridgemountainlife.com/wp-content/gallery/linn-cove-viaduct/1IMG_6787.jpg);
 }
 
 .registrer-medlem {
@@ -14,48 +15,7 @@ body {
   position: relative;
 }
 
-  .registrer-medlem form {
-    max-width: 600px;
-    width: 70%;
-    background-color: #274463;
-    padding: 40px;
-    border-radius: 4px;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    color: rgb(207, 202, 207);
-    box-shadow: 4px 4px 5px rgba(23, 85, 104, 0.9);
-  }
-
-  .registrer-medlem form .form-control {
-    background: none;
-    border: none;
-    border-bottom: 1px solid #434a52;
-    border-radius: 0;
-    box-shadow: none;
-    outline: none;
-    color: inherit;
-  }
-
-  .btn-primary {
-    background: #664014;
-    border: none;
-    border-radius: 4px;
-    padding: 11px;
-    box-shadow: none;
-    margin-top: 26px;
-    text-shadow: none;
-    outline: none;
-  }
-
-  .medlembakgrunn {
-    height: 1000px;
-    background-size: cover;
-    position: relative;
-  }
-
-  .medlemdata {
+.registrer-medlem form {
   max-width: 600px;
   width: 70%;
   background-color: #274463;
@@ -69,35 +29,74 @@ body {
   box-shadow: 4px 4px 5px rgba(23, 85, 104, 0.9);
 }
 
-  .medlemdata .datafelt {
-    background: none;
-    border: none;
-    border-bottom: 1px solid #434a52;
-    border-radius: 0;
-    box-shadow: none;
-    outline: none;
-    color: inherit;
-  }
+.registrer-medlem form .form-control {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #434a52;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+}
+
+.btn-primary {
+  background: #664014;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none;
+}
+
+.medlembakgrunn {
+  height: 1000px;
+  background-size: cover;
+  position: relative;
+}
+
+.medlemdata {
+  max-width: 600px;
+  width: 70%;
+  background-color: #274463;
+  padding: 40px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: rgb(207, 202, 207);
+  box-shadow: 4px 4px 5px rgba(23, 85, 104, 0.9);
+}
+
+.medlemdata .datafelt {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #434a52;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+}
 
 .custom-control-input:checked ~ .custom-control-label::before {
-   color: #fff;
-   border-color: #7B1FA2;
-   background-color: #7B1FA2;
-  }
+  color: #fff;
+  border-color: #7b1fa2;
+  background-color: #7b1fa2;
+}
 
-.custom-control-input:checked~.custom-control-label::after {
+.custom-control-input:checked ~ .custom-control-label::after {
   background-color: rgb(55, 99, 96);
   border-radius: 50%;
 }
 
 .feilmelding {
-  background-color:red;
-
-  
+  background-color: red;
 }
 
 .kurs-select select {
-  display: none; 
+  display: none;
 }
 
 .select-selected {
@@ -107,25 +106,3 @@ body {
 .div #submitButton {
   display: none;
 }
-
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-  
-
-
-
-  
-  
-  
-  
-  
