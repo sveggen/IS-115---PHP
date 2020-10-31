@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: container-build/web/Dockerfile
+    hostname: "foobar"
     environment:
     - MYSQL_DATABASE=ergotests
     - MYSQL_USER=bacit
@@ -29,5 +30,17 @@ services:
     volumes:
     - "mysql_data:/var/lib/mysql"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+      - db:db
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: BACIT2020
+      MYSQL_ROOT_PASSWORD: BSBACIT2020
+
 volumes:
   mysql_data: { driver: local }
+
