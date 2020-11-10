@@ -1,14 +1,9 @@
 <!-- Oppgave 2 -->
 
-<html>
-
-<head>
-    <title>Passordgenerator</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
-
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Passordgenerator";
+?>
     <h1>Passordgenerator</h1>
     <hr width=100%”>
 
@@ -31,8 +26,8 @@
 
     if (!empty($_GET['etternavn']) && isset($_GET['submit'])) {
 
-        $temppass = generatePassword($etternavn);
         $etternavn = $_GET['etternavn'];
+        $temppass = generatePassword($etternavn);
 
         if (preg_match('/[0-9]/', $temppass) && preg_match('/[A-Z]/', $temppass)) {
             # Echo'er 8 tegn av av hashet verdi. 
@@ -47,8 +42,4 @@
         echo "Ingen etternavn fylt inn";
     }
 
-    ?>
-
-</body>
-
-</html>
+    include './include/footer.inc.php'; ?>

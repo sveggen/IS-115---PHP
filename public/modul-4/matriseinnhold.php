@@ -25,7 +25,6 @@ $heltall = array(
 <?php
 foreach($heltall as $key => $value){
     echo"<p> key: {$key} | value: {$value} </p>";
-};
-?>
-    </body>
-</html>
+}
+
+include './include/footer.inc.php'; ?>

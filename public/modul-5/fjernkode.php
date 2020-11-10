@@ -1,14 +1,9 @@
 <!-- Oppgave 3 -->
 
-<html>
-
-<head>
-    <title>Fjern kode</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
-
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Fjern kode";
+?>
     <h1>Fjern kode</h1>
     <hr width=100%”>
 
@@ -27,9 +22,4 @@
     echo "<br>";
     echo $fjernet_kode;
 
-    ?>
-
-
-</body>
-
-</html>
+    include './include/footer.inc.php'; ?>

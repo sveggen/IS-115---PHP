@@ -39,7 +39,7 @@ while (count($deltakere) >= 2 && $game == true){
         echo '<h3><div class="p-3 mb-2 bg-success text-white">Deltaker ' . implode(" og ", array_keys($deltakere)) . ' vant</h3></div>';
     break;
 }
-    #Fjern deltaker(e)
+    # Fjern deltaker(e)
     foreach($laveste as $item){
             unset($deltakere[$item]);
             echo '<p class="text-danger">Deltaker ' . $item . ' hadde minst poeng og røk ut</p>';
@@ -54,6 +54,4 @@ while (count($deltakere) >= 2 && $game == true){
         }
     }
 
-?>
-    </body>
-</html>
+include './include/footer.inc.php'; ?>

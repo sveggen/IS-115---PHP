@@ -1,13 +1,8 @@
 <!-- Oppgave 5 -->
-<html>
-
-<head>
-    <title>Epost</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
-
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Epost";
+?>
     <h1>Epost</h1>
     <hr width=100%”>
 
@@ -33,4 +28,5 @@
     } else {
         echo "Fyll ut alle feltene";
     }
-    ?>
+
+    include './include/footer.inc.php'; ?>

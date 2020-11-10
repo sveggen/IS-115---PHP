@@ -1,7 +1,7 @@
 <!-- Oppgave 2 -->
 <?php
 include './include/header.inc.php';
-$title = "Overskrive matris";
+$title = "Overskrive matrise";
 ?>
     <h1>Overskrive matrise</h1>
     <hr width=100%”>
@@ -27,6 +27,5 @@ $index = 10;
 $nytt_array = array_combine(range($index, count($array)+ $index-1), array_values($array));
 echo "<h3>Array med index inkrementert med 10</h3>";
 print_r($nytt_array);
-?>
-    </body>
-</html>
+
+include './include/footer.inc.php'; ?>

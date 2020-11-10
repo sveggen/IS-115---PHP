@@ -1,13 +1,8 @@
 <!-- Oppgave 1 -->
-<html>
-
-<head>
-    <title>Etternavn</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
-
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Etternavn";
+?>
     <h1>Etternavn</h1>
     <hr width=100%”>
 
@@ -52,8 +47,5 @@
     } elseif (isset($submit) && empty($etternavn)) {
         echo "Ingen etternavn fylt inn";
     }
-    ?>
 
-</body>
-
-</html>
+    include './include/footer.inc.php'; ?>

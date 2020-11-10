@@ -1,13 +1,8 @@
 <!-- Oppgave 4 -->
-<html>
-
-<head>
-    <title>Alder</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
-
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Alder";
+?>
     <h1>Hvor gammel er du?</h1>
     <hr width=100%”>
 
@@ -46,8 +41,4 @@
         echo "<p>Alle felt er ikke fylt ut.</p>";
     }
 
-    ?>
-
-</body>
-
-</html>
+    include './include/footer.inc.php'; ?>
