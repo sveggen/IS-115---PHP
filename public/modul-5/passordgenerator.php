@@ -14,6 +14,10 @@ $title = "Passordgenerator";
     </div>
     <?php
 
+    /**
+     * @param $etternavn
+     * @return false|string
+     */
     function generatePassword($etternavn)
     {
         $hash = md5($etternavn);
