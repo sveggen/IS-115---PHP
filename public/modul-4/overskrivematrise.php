@@ -1,10 +1,8 @@
 <!-- Oppgave 2 -->
-<html>
-<head>
-        <title>Overskrive matrise</title>
-        <link rel="stylesheet" href="/modul-4/style.css">
-</head>
-    <body>
+<?php
+include './include/header.inc.php';
+$title = "Overskrive matris";
+?>
     <h1>Overskrive matrise</h1>
     <hr width=100%”>
 <?php

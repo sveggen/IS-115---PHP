@@ -1,10 +1,8 @@
 <!-- Oppgave 1 -->
-<html>
-<head>
-        <title>Matriseinnhold</title>
-        <link rel="stylesheet" href="/modul-4/style.css">
-</head>
-    <body>
+<?php
+include './include/header.inc.php';
+$title = "Matriseinnhold";
+?>
     <h1>Matriseinnhold</h1>
     <hr width=100%”>
 <?php

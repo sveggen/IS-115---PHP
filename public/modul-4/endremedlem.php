@@ -1,14 +1,9 @@
 <!-- Oppgave 5 -->
 
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Endre medlem</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="/modul-4/style.css">
-</head>
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Endre medlem";
+?>
 
 <div style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Fcold_night_mountains_hd-2560x1440.jpg&f=1&nofb=1');">
 <?php
