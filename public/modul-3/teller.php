@@ -10,7 +10,7 @@ $title = "Teller";
 
 /**
  * Looper over tallene i rangen 0-9 og printer disse.
- * Summerer alle tallene i rangen og printer sum.
+ * Summerer alle tallene i rangen og printer summen.
  */
 for ($tall = 0; $tall < 10; $tall++) {
     echo '<p>' . $tall . '</p>';

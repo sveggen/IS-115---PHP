@@ -13,7 +13,6 @@ $title = "Skjemasjekk";
            style="width:20%">
     <input name="submit" type="submit" value="Send" class="w3-circle w3-green">
 </form>
-</div>
 
 <?php
 

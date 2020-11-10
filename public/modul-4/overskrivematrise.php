@@ -9,9 +9,10 @@ $title = "Overskrive matrise";
 // start-array
 $array = array("for", "en", "fin", "dag", "det", "var", "det", "var", "i", "dag");
 echo "<h3>Start-array</h3>";
+//printer opprinnelig array
 print_r($array);
 
-//endrer alle verdier i array
+//endrer alle verdier i array til ja eller nei
 for ($i=0; $i<10; $i++){
     if (($i % 2) == 0) {
     $array[$i] = "ja";

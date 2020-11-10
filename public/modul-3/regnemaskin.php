@@ -12,7 +12,6 @@ $title = "Regnemaskin";
     <input name="andre" type="number" placeholder="Tall 2" class="form-control" style="width:10%">
     <input name="submit" type="submit" value="Kalkuler" class="w3-circle w3-green">
 </form>
-</div>
 <?php
 
 $forsteTall = $_POST['første'];

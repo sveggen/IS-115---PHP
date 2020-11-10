@@ -17,12 +17,15 @@ $heltall = array(
    
    <h2>Print_r</h2>
 <p>
-<?php print_r($heltall); ?>
+<?php
+// skriver ut innholdet i matrisen
+print_r($heltall); ?>
 </p>
 </br>
 
 <h2>For-each</h2>
 <?php
+//skriver ut innholdet i matrisen ved bruk av en foreach-loop
 foreach($heltall as $key => $value){
     echo"<p> key: {$key} | value: {$value} </p>";
 }

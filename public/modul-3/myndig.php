@@ -23,7 +23,8 @@ $navn = $_POST['navn'];
 
 if (isset($_POST['submit']) && isset($_POST['alder']) && isset($_POST['navn']) && is_numeric($_POST['alder'])) {
 
-    $myndig = ($alder >= 18) ? "myndig" : "ikke myndig"; //sjekker om person er myndig.
+    //sjekker om person er myndig.
+    $myndig = ($alder >= 18) ? "myndig" : "ikke myndig";
 
     // sjekker hvor gammel person er og tildeler aldersgruppe.
     $aldertype = "";

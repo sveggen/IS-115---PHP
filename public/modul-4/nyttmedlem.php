@@ -3,6 +3,9 @@
 <?php
 include './include/header.inc.php';
 $title = "Registrere nytt medlem";
+
+include './include/feltValidering.inc.php';
+
 ?>
 <div class="bakgrunn">
 
@@ -10,10 +13,13 @@ $title = "Registrere nytt medlem";
 
     $medlem = array();
 
-    include './include/feltValidering.inc.php';
-
+    //sjekker om alle felt er utfylt
     alleFeltUtfylt();
 
+    /**
+     * Fremviser all medlemsdata om alle felt har blitt fylt ut riktig.
+     * Genererer også medlemsnr, kontigentstatus og dato for innmelding.
+     */
     if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
         $medlem += $_POST;
         $medlem['medlemsnr'] = random_int(1000000, 9999999);
@@ -102,6 +108,7 @@ $title = "Registrere nytt medlem";
                 </div>
                 <button class="btn btn-primary btn-block" onclick="goBack()">Gå tilbake</button>
                 <script>
+                    // Går tilbake til forrige side
                     function goBack() {
                         window.history.back();
                     }
@@ -110,9 +117,13 @@ $title = "Registrere nytt medlem";
         </div>
 
         <?
-# om ikke alle felt har blitt fylt ut riktig
+
+        // om ikke alle felt har blitt fylt ut riktig
     } else {
 
+    /**
+     * Populerer felt med verdi fra $POST-arrayet.
+     */
     function setVerdi($felt)
     {
         $value = "";
@@ -219,6 +230,10 @@ $title = "Registrere nytt medlem";
                 </div>
             </div>
             <?php
+
+            /**
+             * Populerer valgte interesser med en 'checkmark'.
+             */
             function valgteInteresser($interesse)
             {
                 $checked = "";
@@ -290,9 +305,11 @@ $title = "Registrere nytt medlem";
 
                     <?php }
 
+                    /**
+                     * Markerer alle valgte kurs i nedtrekksmenyen.
+                     */
                     function valgteKurs($kurs)
                     {
-                        $selected = "";
                         if (isset($_POST['kursaktiviteter']) && in_array($kurs, $_POST['kursaktiviteter'])) {
                             $selected = "selected";
                         } else {
@@ -307,16 +324,16 @@ $title = "Registrere nytt medlem";
             </div>
             <div class="form-group">
                 <label for="kursaktiviteter">Kursaktiviteter:
-                <select name="kursaktiviteter[]" class="form-control kurs-select" multiple>
-                    <option <?php valgteKurs("klatrekurs") ?> value="klatrekurs">Klatrekurs</option>
-                    <option <?php valgteKurs("lederkurs") ?> value="lederkurs">Lederkurs</option>
-                    <option <?php valgteKurs("gitarkurs") ?> value="gitarkurs">Gitarkurs</option>
-                    <option <?php valgteKurs("matlagingskurs") ?> value="matlagingskurs">Matlagingskurs</option>
-                    <option <?php valgteKurs("sangkurs") ?> value="sangkurs">Sangkurs</option>
-                    <option <?php echo (isset($_POST['kursaktiviteter']) && in_array('sminkekurs', $_POST['kursaktiviteter'])) ? "selected" : "" ?>
-                            value="sminkekurs">Sminkekurs
-                    </option>
-                </select>
+                    <select name="kursaktiviteter[]" class="form-control kurs-select" multiple>
+                        <option <?php valgteKurs("klatrekurs") ?> value="klatrekurs">Klatrekurs</option>
+                        <option <?php valgteKurs("lederkurs") ?> value="lederkurs">Lederkurs</option>
+                        <option <?php valgteKurs("gitarkurs") ?> value="gitarkurs">Gitarkurs</option>
+                        <option <?php valgteKurs("matlagingskurs") ?> value="matlagingskurs">Matlagingskurs</option>
+                        <option <?php valgteKurs("sangkurs") ?> value="sangkurs">Sangkurs</option>
+                        <option <?php echo (isset($_POST['kursaktiviteter']) && in_array('sminkekurs', $_POST['kursaktiviteter'])) ? "selected" : "" ?>
+                                value="sminkekurs">Sminkekurs
+                        </option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">

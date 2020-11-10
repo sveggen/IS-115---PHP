@@ -25,7 +25,7 @@ if (isset($submit) && !empty($day) && !empty($month) && !empty($year)) {
     if (checkdate($month, $day, $year) == true) {
 
         /**
-         * @return DateTime med tidspunkt fra når bruker ble født.
+         * @return DateTime med tidspunkt når bruker ble født.
          */
         function getBirthdate($year, $month, $day)
         {
@@ -34,7 +34,7 @@ if (isset($submit) && !empty($day) && !empty($month) && !empty($year)) {
         }
 
         /**
-         * @return string som inneholder alder til bruker i år og dager.
+         * @return string som inneholder alder i år og dager.
          */
         function getAgeInYearsAndDays($year, $month, $day)
         {

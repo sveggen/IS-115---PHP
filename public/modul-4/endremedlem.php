@@ -5,6 +5,9 @@
 include './include/header.inc.php';
 $title = "Endre medlem";
 
+include './include/feltValidering.inc.php';
+
+// array som inneholder all dummy-medlemsdata
 $medlem = array(
     "fornavn" => "Markus",
     "etternavn" => "Sveggen",
@@ -27,10 +30,12 @@ $medlem = array(
     )
 );
 
-include './include/feltValidering.inc.php';
-
+//sjekker om alle felt er utfylt
 alleFeltUtfylt();
 
+/**
+ * Populerer felt med verdi fra $medlem arrayet.
+ */
 function setVerdi($felt)
 {
     global $medlem;
@@ -46,6 +51,11 @@ function setVerdi($felt)
         </div>
 
         <?php
+
+        /**
+         * Sjekker om endringer er blitt gjort og oppdaterer evt. '
+         * array og printer tilhørende beskjed.
+         */
         if (isset($_POST['submit']) && alleFeltUtfylt() == true) {
             $endringer_gjort = false;
             if ($medlem['interesser'] != $_POST['interesser']
@@ -148,10 +158,13 @@ function setVerdi($felt)
         </div>
 
         <?php
+
+        /**
+         * Populerer valgte interesser med en 'checkmark'.
+         */
         function valgteInteresser($interesse)
         {
             global $medlem;
-            $checked = "";
             if (isset($medlem['interesser']) && in_array($interesse, $medlem['interesser'])) {
                 $checked = "checked";
             } else {
@@ -219,6 +232,10 @@ function setVerdi($felt)
                     <small class="form-text text-danger">Velg minst en interesse.</small>
 
                 <?php }
+
+                /**
+                 * Markerer alle valgte kurs i nedtrekksmenyen.
+                 */
                 function valgteKurs($kurs)
                 {
                     global $medlem;
