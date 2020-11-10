@@ -1,10 +1,8 @@
 <!-- Oppgave 2 -->
-<html>
-    <head>
-        <title>Teller</title>
-        <link rel="stylesheet" href="/modul-3/style.css">
-    </head>
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Teller";
+?>
     <h1>Teller</h1>
 <?php
 for($tall=0; $tall < 10; $tall++){ 

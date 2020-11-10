@@ -1,11 +1,8 @@
 <!-- Oppgave 3 -->
-<html>
-    <head>
-        <title>Regnemaskin</title>
-        <link rel="stylesheet" href="/modul-2/style.css">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-    <body>
+<?php
+include './include/header.inc.php';
+$title = "Regnemaskin";
+?>
         <h1>Regnemaskin</h1>
         <hr width=100%”>
 

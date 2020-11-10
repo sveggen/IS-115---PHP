@@ -1,11 +1,8 @@
 <!-- Oppgave 5 -->
-<html>
-<head>
-    <title>Velkomsthilsen</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-3/style.css">
-</head>
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Velkomsthilsen";
+?>
 <h1>Velkomsthilsen</h1>
 <?php
 date_default_timezone_set('CET');
