@@ -1,10 +1,8 @@
 <!-- Oppgave 1 -->
-<html>
-<head>
-    <title>Myndighetskalkulator</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-3/style.css">
-    <body>
+<?php
+include './include/header.inc.php';
+$title = "Myndighetskalkulator";
+?>
         <h1>Myndighetskalkulator</h1>
         <hr width=100%”>
 

@@ -1,11 +1,8 @@
 <!-- Oppgave 4 -->
-<html>
-<head>
-    <title>Skjemasjekk</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-3/style.css">
-</head>
-<body>
+<?php
+include './include/header.inc.php';
+$title = "Skjemasjekk";
+?>
 <h1>Skjemasjekk</h1>
         <hr width=100%”>
 
