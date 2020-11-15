@@ -2,6 +2,7 @@
 <?php
 
 require_once "models/MemberModel.php";
+require_once "models/InterestsModel.php";
 include './include/header.inc.php';
 include './include/fieldValidation.php';
 
@@ -21,10 +22,9 @@ $title = "Add member";
 
     $memberdata = $_POST;
 
-        $model = new MemberModel();
-
-        $model->addMember($memberdata['firstname'], $memberdata['lastname'], $memberdata['email'], $memberdata['phonenumber'],
-            $memberdata['streetaddress'], $memberdata['zipcode'], $memberdata['city'], 1);
+        $memberModel = new MemberModel();
+        $memberModel->addMember($memberdata['firstname'], $memberdata['lastname'], $memberdata['email'], $memberdata['phonenumber'],
+            $memberdata['streetaddress'], $memberdata['zipcode'], $memberdata['city'], 0, $memberdata['interests']);
 
         echo "Member added";
     } else {
@@ -140,8 +140,25 @@ $title = "Add member";
                         <small class="form-text text-danger">City is missing or not valid.</small>
                     <?php } ?>
                 </div>
+            </div>
 
-                </div>
+                <div class="form-group ">
+                <label for="checkboxes">Interests:</label>
+                    <div class="checkboxes">
+                        <?php
+
+                        $interestModel = new InterestsModel();
+                        $interests = $interestModel->getAllInterests();
+                        foreach ($interests as $row) {
+                            ?>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="interests[]" class="form-check-input"
+                                       value="<?php echo $row['interestid'] ?>">
+                                <label class="form-check-label" for="<?php echo $row['name'] ?>"><?php echo ucfirst($row['name']) ?></label>
+                            </div>
+                        <?php } ?>
+
+                    </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" name="submit" type="submit">Register</button>
             </div>
