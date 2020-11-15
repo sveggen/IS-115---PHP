@@ -124,7 +124,7 @@ include './include/feltValidering.inc.php';
     /**
      * Populerer felt med verdi fra $POST-arrayet.
      */
-    function setVerdi($felt)
+    function setValue($felt)
     {
         $value = "";
         if (!empty($_POST[$felt])) {
@@ -153,7 +153,6 @@ include './include/feltValidering.inc.php';
                     <input type="text" class="form-control" name="etternavn" placeholder="Nordmann"
                         <?php echo (!empty($_POST['etternavn'])) ? ('value = "' . $_POST["etternavn"] . '"') : "value = \"\""; ?> />
                     <?php if (empty($_POST['etternavn']) && isset($_POST['submit'])) {
-                        $mangler_verdier = true;
                         ?>
                         <small class="form-text text-danger">Fyll inn et etternavn.</small>
                     <?php } ?>
@@ -162,7 +161,7 @@ include './include/feltValidering.inc.php';
             <div class="form-group ">
                 <label for="email">Email: </label>
                 <input type="email" class="form-control" name="epost"
-                       placeholder="ola@mail.no" <?php setVerdi("epost") ?> />
+                       placeholder="ola@mail.no" <?php setValue("epost") ?> />
                 <?php if (empty($_POST['epost']) && isset($_POST['submit'])) { ?>
                     <small class="form-text text-danger">Fyll inn en gyldig epostadresse.</small>
                 <?php } ?>
@@ -170,7 +169,7 @@ include './include/feltValidering.inc.php';
             <div class="form-group">
                 <label for="mobilnummer">Mobilnummer: </label>
                 <input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}"
-                       placeholder="12345678" <?php setVerdi("mobilnummer") ?> />
+                       placeholder="12345678" <?php setValue("mobilnummer") ?> />
                 <?php if (empty($_POST['mobilnummer']) && isset($_POST['submit'])) { ?>
                     <small class="form-text text-danger">Fyll inn et mobilnummer med 8 tall.</small>
                 <?php } ?>
@@ -178,7 +177,7 @@ include './include/feltValidering.inc.php';
             <div class="form-group">
                 <label for="dato">Fødselsdato: </label>
                 <input type="date" class="form-control" min="1900-01-01" max="2010-01-01"
-                       name="dato" <?php date("YYYY-MM-DD", strtotime(setVerdi("dato"))) ?> placeholder/>
+                       name="dato" <?php date("YYYY-MM-DD", strtotime(setValue("dato"))) ?> placeholder/>
                 <?php if (empty($_POST['dato']) && isset($_POST['submit'])) { ?>
                     <small class="form-text text-danger">Fyll inn en fødselsdato.</small>
                 <?php } ?>
@@ -215,7 +214,7 @@ include './include/feltValidering.inc.php';
                 <div class="form-group ">
                     <label for="postnummer">Postnummer: </label>
                     <input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}"
-                           placeholder="1431" <?php setVerdi("postnummer") ?> />
+                           placeholder="1431" <?php setValue("postnummer") ?> />
                     <?php if (empty($_POST['postnummer']) && isset($_POST['submit'])) { ?>
                         <small class="form-text text-danger">Fyll inn et gyldig postnummer.</small>
                     <?php } ?>
@@ -223,7 +222,7 @@ include './include/feltValidering.inc.php';
                 <div class="form-group ">
                     <label for="poststed">Poststed: </label>
                     <input type="text" class="form-control" name="poststed"
-                           placeholder="Stabekk" <?php setVerdi("poststed") ?> />
+                           placeholder="Stabekk" <?php setValue("poststed") ?> />
                     <?php if (empty($_POST['poststed']) && isset($_POST['submit'])) { ?>
                         <small class="form-text text-danger">Fyll inn et poststed.</small>
                     <?php } ?>

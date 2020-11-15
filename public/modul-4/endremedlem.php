@@ -5,7 +5,7 @@
 include './include/header.inc.php';
 $title = "Endre medlem";
 
-include './include/feltValidering.inc.php';
+include './include/fieldValidation.php';
 
 // array som inneholder all dummy-medlemsdata
 $medlem = array(
@@ -38,8 +38,8 @@ alleFeltUtfylt();
  */
 function setVerdi($felt)
 {
-    global $medlem;
-    $value = "value =" . $medlem[$felt];
+    global $member;
+    $value = "value =" . $member[$felt];
     echo (string)$value;
 }
 
@@ -92,7 +92,7 @@ function setVerdi($felt)
         <div class="form-group ">
             <label for="email">Email: </label>
             <input type="email" class="form-control" name="epost"
-                   placeholder="ola@mail.no" <?php setVerdi("epost") ?> />
+                   placeholder="ola@mail.no" <?php setValue("epost") ?> />
             <?php if (empty($_POST['epost']) && isset($_POST['submit'])) { ?>
                 <small class="form-text text-danger">Fyll inn en gyldig epostadresse.</small>
             <?php } ?>
@@ -100,7 +100,7 @@ function setVerdi($felt)
         <div class="form-group">
             <label for="mobilnummer">Mobilnummer: </label>
             <input type="tel" class="form-control" name="mobilnummer" pattern="[0-9]{8}"
-                   placeholder="12345678" <?php setVerdi("mobilnummer") ?> />
+                   placeholder="12345678" <?php setValue("mobilnummer") ?> />
             <?php if (empty($_POST['mobilnummer']) && isset($_POST['submit'])) { ?>
                 <small class="form-text text-danger">Fyll inn et mobilnummer med 8 tall.</small>
             <?php } ?>
@@ -108,7 +108,7 @@ function setVerdi($felt)
         <div class="form-group">
             <label for="dato">Fødselsdato: </label>
             <input type="date" class="form-control" name="dato" min="1900-01-01"
-                   max="2010-01-01" <?php date("d.m.Y", strtotime(setVerdi("dato"))) ?> placeholder/>
+                   max="2010-01-01" <?php date("d.m.Y", strtotime(setValue("dato"))) ?> placeholder/>
             <?php if (empty($_POST['dato']) && isset($_POST['submit'])) { ?>
                 <small class="form-text text-danger">Fyll inn en gyldig fødselsdato.</small>
             <?php } ?>
@@ -142,7 +142,7 @@ function setVerdi($felt)
             <div class="form-group ">
                 <label for="postnummer">Postnummer: </label>
                 <input type="text" class="form-control" name="postnummer" pattern="[0-9]{4}"
-                       placeholder="1431" <?php setVerdi("postnummer") ?> />
+                       placeholder="1431" <?php setValue("postnummer") ?> />
                 <?php if (empty($_POST['postnummer']) && isset($_POST['submit'])) { ?>
                     <small class="form-text text-danger">Fyll inn et gyldig postnummer.</small>
                 <?php } ?>
@@ -150,7 +150,7 @@ function setVerdi($felt)
             <div class="form-group ">
                 <label for="poststed">Poststed: </label>
                 <input type="text" class="form-control" name="poststed"
-                       placeholder="Stabekk" <?php setVerdi("poststed") ?> />
+                       placeholder="Stabekk" <?php setValue("poststed") ?> />
                 <?php if (empty($_POST['poststed']) && isset($_POST['submit'])) { ?>
                     <small class="form-text text-danger">Fyll inn et poststed.</small>
                 <?php } ?>
@@ -164,8 +164,8 @@ function setVerdi($felt)
          */
         function valgteInteresser($interesse)
         {
-            global $medlem;
-            if (isset($medlem['interesser']) && in_array($interesse, $medlem['interesser'])) {
+            global $member;
+            if (isset($member['interesser']) && in_array($interesse, $member['interesser'])) {
                 $checked = "checked";
             } else {
                 $checked = "";
@@ -238,8 +238,8 @@ function setVerdi($felt)
                  */
                 function valgteKurs($kurs)
                 {
-                    global $medlem;
-                    if (isset($medlem['kursaktiviteter']) && in_array($kurs, $medlem['kursaktiviteter'])) {
+                    global $member;
+                    if (isset($member['kursaktiviteter']) && in_array($kurs, $member['kursaktiviteter'])) {
                         $selected = "selected";
                     } else {
                         $selected = "";
