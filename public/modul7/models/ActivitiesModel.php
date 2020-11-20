@@ -5,6 +5,10 @@ require_once "Database.php";
 class ActivitiesModel extends Database
 {
 
+    /**
+     * @return false|mysqli_result Containing MySQL of array containing
+     * all future activities.
+     */
     public function getAllFutureActivities(){
         $sql = "SELECT * FROM Activities WHERE Activities.start >= CURTIME() ORDER BY Activities.start";
         $stmt = $this->getConnection()->prepare($sql);

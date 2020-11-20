@@ -5,7 +5,12 @@ require_once "Database.php";
 class MemberModel extends Database
 {
 
-    public function getMembers(){
+    /**
+     * @return false|mysqli_result Retrieve MySQL-object containing
+     * array of members.
+     */
+    public function getMembers()
+    {
         $sql = "SELECT * FROM Members";
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
@@ -15,16 +20,13 @@ class MemberModel extends Database
 
     }
 
-    public function getSingleMember(){
-
-    }
-
-    public function getNewestMember(){
-
-
-    }
-
-    public function addMember($firstname, $lastname, $email, $phonenumber, $streetadress, $zipcode, $city, $paid, $interests){
+    /**
+     * Adds a new member to the DB.
+     * @return false|mysqli_result Return either true or false depending
+     * on success/failure.
+     */
+    public function addMember($firstname, $lastname, $email, $phonenumber, $streetadress, $zipcode, $city, $paid, $interests)
+    {
         $sql = "INSERT INTO Members (firstname, lastname, email, phonenumber, streetadress, zipcode, city, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->bind_param("sssssssi", $firstname, $lastname, $email, $phonenumber, $streetadress, $zipcode, $city, $paid);
@@ -35,7 +37,11 @@ class MemberModel extends Database
         return $result;
     }
 
-    public function addMemberInterests($memberid, $interests){
+    /**
+     * Adds interests to a member.
+     */
+    public function addMemberInterests($memberid, $interests)
+    {
         $sql = "INSERT INTO MembersInterests (memberid, interestid) VALUES (?, ?)";
         $this->getConnection()->begin_transaction();
         foreach ($interests as $interest) {
@@ -45,6 +51,24 @@ class MemberModel extends Database
             $stmt->close();
         }
         $this->getConnection()->commit();
+
+    }
+
+    /**
+     * @return false|mysqli_result Returns a MySQL-object with an array of
+     * members and their interests.
+     */
+    public function getAllMemberInterests()
+    {
+        $sql = "SELECT * FROM MembersInterests JOIN Interests I 
+    on MembersInterests.interestid = I.interestid
+    JOIN Members M on MembersInterests.memberid = M.memberid
+    ORDER BY I.name";
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
 
     }
 

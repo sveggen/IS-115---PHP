@@ -14,6 +14,10 @@ abstract class Database
         $this->database = $this->connect();
     }
 
+    /**
+     * Connects to the DB.
+     * @return mysqli containing connection point to DB.
+     */
     public function connect()
     {
         define('HOST', 'db');

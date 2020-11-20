@@ -1,4 +1,4 @@
-<!-- Oppgave 2 -->
+<!-- Oppgave 4-->
 <?php
 
 require_once "models/ActivitiesModel.php";
