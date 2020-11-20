@@ -1,53 +1,58 @@
 <!-- Oppgave 4 -->
-<html>
+<?php
+include './include/header.inc.php';
+$title = "Alder";
+?>
+<h1>Hvor gammel er du?</h1>
+<hr width=100%”>
 
-<head>
-    <title>Alder</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/modul-5/style.css">
-</head>
+<form method="get" action="">
+    <input name="day" type="number" min="1" max="31" placeholder="Dag" class="form-control" style="width:20%">
+    <input name="month" type="number" min="1" max="12" placeholder="Måned" class="form-control" style="width:20%">
+    <input name="year" type="number" min="1900" max="2020" placeholder="År" class="form-control" style="width:20%">
+    <input name="submit" type="submit" value="Send" class="w3-circle w3-green">
+</form>
+</div>
 
-<body>
-    <h1>Hvor gammel er du?</h1>
-    <hr width=100%”>
+<?php
+$submit = $_GET['submit'];
+$day = $_GET['day'];
+$month = $_GET['month'];
+$year = $_GET['year'];
 
-    <form method="get" action="">
-        <input name="day" type="number" min="1" max="31" placeholder="Dag" class="form-control" style="width:20%">
-        <input name="month" type="number" min="1" max="12" placeholder="Måned" class="form-control" style="width:20%">
-        <input name="year" type="number" min="1900" max="2020" placeholder="År" class="form-control" style="width:20%">
-        <input name="submit" type="submit" value="Send" class="w3-circle w3-green">
-    </form>
-    </div>
+// sjekker om alle felt er utfylt og dato eksisterer.
+if (isset($submit) && !empty($day) && !empty($month) && !empty($year)) {
+    if (checkdate($month, $day, $year) == true) {
 
-    <?php
-    $submit = $_GET['submit'];
-    $day = $_GET['day'];
-    $month = $_GET['month'];
-    $year = $_GET['year'];
-
-    if (isset($submit) && !empty($day) && !empty($month) && !empty($year)) {
-        if (checkdate($month, $day, $year) == true) {
-
+        /**
+         * @return DateTime med tidspunkt når bruker ble født.
+         */
+        function getBirthdate($year, $month, $day)
+        {
             $agestr = $year . "-" . $month . "-" . $day;
+            return $birthdate = new DateTime($agestr);
+        }
+
+        /**
+         * @return string som inneholder alder i år og dager.
+         */
+        function getAgeInYearsAndDays($year, $month, $day)
+        {
+            $birthdate = getBirthdate($year, $month, $day);
             $now = new DateTime();
-            $birthdate = new DateTime($agestr);
-            # Finner differansen mellom de to datointervallene. 
             $difference = $now->diff($birthdate);
             $age_in_years = $difference->y;
             $age_in_days = $difference->days;
             $age_in_days = $age_in_days % 365;
-
-            echo "<p>Fødselsdato: " . date('d.m.Y', strtotime($agestr)) . "</p>";
-            echo "<p><u>Du er " . $age_in_years . "år, og " . $age_in_days . " dager gammel.<u></p>";
-        } else {
-            echo "<p>Ugyldig dato.</p>";
+            return $age_in_years . " år, og " . $age_in_days . " dager gammel.";
         }
+
+        echo "<p><u>Du er " . getAgeInYearsAndDays($_GET['year'], $_GET['month'], $_GET['day']) . " <u></p>";
     } else {
-        echo "<p>Alle felt er ikke fylt ut.</p>";
+        echo "<p>Ugyldig dato.</p>";
     }
+} else {
+    echo "<p>Alle felt er ikke fylt ut.</p>";
+}
 
-    ?>
-
-</body>
-
-</html>
+include './include/footer.inc.php'; ?>

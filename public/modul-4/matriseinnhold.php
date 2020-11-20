@@ -1,10 +1,8 @@
 <!-- Oppgave 1 -->
-<html>
-<head>
-        <title>Matriseinnhold</title>
-        <link rel="stylesheet" href="/modul-4/style.css">
-</head>
-    <body>
+<?php
+include './include/header.inc.php';
+$title = "Matriseinnhold";
+?>
     <h1>Matriseinnhold</h1>
     <hr width=100%”>
 <?php
@@ -19,15 +17,17 @@ $heltall = array(
    
    <h2>Print_r</h2>
 <p>
-<?php print_r($heltall); ?>
+<?php
+// skriver ut innholdet i matrisen
+print_r($heltall); ?>
 </p>
 </br>
 
 <h2>For-each</h2>
 <?php
+//skriver ut innholdet i matrisen ved bruk av en foreach-loop
 foreach($heltall as $key => $value){
     echo"<p> key: {$key} | value: {$value} </p>";
-};
-?>
-    </body>
-</html>
+}
+
+include './include/footer.inc.php'; ?>
