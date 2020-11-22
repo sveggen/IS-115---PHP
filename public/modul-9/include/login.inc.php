@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['loggedIn'])) {
-    header("Location:http://www.localhost:8081/modul-8/dashboard.php");
+    header("Location:http://www.localhost:8081/modul-9/dashboard.php");
 
 } else {
 
@@ -29,8 +29,7 @@ $title = "Log in";
                     <button class="btn btn-primary btn-block" name="submit" type="submit">Log in</button>
                     <?php if (!isset($_SESSION['username']) && isset($_POST['submit'])) {
                         ?><small class="form-text text-danger">Wrong username or password.</small>
-                        <?php
-                    } ?>
+                        <?php } ?>
                 </div>
             </form>
         </div>
