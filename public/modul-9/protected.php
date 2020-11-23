@@ -2,36 +2,66 @@
 session_start();
 
 require_once "models/UserModel.php";
-include './include/header.inc.php';
 $title = "User Information";
+include './include/header.inc.php';
 
 $userModel = new UserModel();
 $array = $userModel->getSingleUser($_SESSION['username']);
-$membernr = "";
+
+$dir_path = "./assets/images/";
+$prefix = array("jpg", "png", "jpeg");
+
+// finds the users profile image OR
+// returns the placeholder image
+function find_profile_image() {
+    global $prefix;
+    global $dir_path;
+    $existing_file = "";
+
+    foreach ($prefix as $element) {
+        $file = $dir_path . $_SESSION['memberid'] . "." . $element;
+        if (file_exists($file)) {
+            $existing_file =  $file;
+        }
+    }
+    if ($existing_file){
+        return $existing_file;
+    } else{
+        return $dir_path . "placeholder.png";
+    }
+}
 
 include './include/upload.inc.php';
+$msg = upload_image();
 ?>
 
 <div class="medlembakgrunn">
     <div class="medlemdata">
-        <h1>User info </h1>
+        <h1>Profile </h1>
         <?php
         foreach ($array as $row) {
-            echo "<p>Hi " . $row['username'] . "<br>Your membernumber is: " . $row['memberid'] .
+            echo "<p>Username: " . $row['username'] . "<br>Member-ID: " . $row['memberid'] .
                 " </p>";
-            echo  '<img src="assets/images/' . $row['memberid'] . '.jpg" width="150" height="100" </img>';
-            $membernr = $row['memberid'];
+            echo '<img src="' . find_profile_image() . '"width="200" height="200" </img>';
         }
         ?>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="image"></label>
+                <input type="file" class="form-control-file" id="customFile" name="path">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary " name="submit" type="submit">Add picture</button>
+            </div>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="image">Image:</label>
-            <input type="file" name="path" size="20">
-        </div>
-        <div class="form-group">
-            <input type="submit" name="submit">
-        </div>
-    </form>
+            <?php
+            if (is_array($msg)){
+                echo implode(",", $msg);
+            } else {
+                echo $msg;
+            }?>
+        </form>
     </div>
 </div>
+
+
