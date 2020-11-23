@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
         // set session variables
         $_SESSION['loggedIn'] = true;
         $_SESSION['username'] = $_POST['email'];
-        header("Location:http://www.localhost:8081/modul-8/dashboard.php");
+        header("Location:http://www.localhost:8081/modul-10/dashboard.php");
         exit();
 
     } else {
