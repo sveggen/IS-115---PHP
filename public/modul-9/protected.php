@@ -13,7 +13,8 @@ $prefix = array("jpg", "png", "jpeg");
 
 // finds the users profile image OR
 // returns the placeholder image
-function find_profile_image() {
+function find_profile_image()
+{
     global $prefix;
     global $dir_path;
     $existing_file = "";
@@ -21,12 +22,12 @@ function find_profile_image() {
     foreach ($prefix as $element) {
         $file = $dir_path . $_SESSION['memberid'] . "." . $element;
         if (file_exists($file)) {
-            $existing_file =  $file;
+            $existing_file = $file;
         }
     }
-    if ($existing_file){
+    if ($existing_file) {
         return $existing_file;
-    } else{
+    } else {
         return $dir_path . "placeholder.png";
     }
 }
@@ -37,12 +38,12 @@ $msg = upload_image();
 
 <div class="medlembakgrunn">
     <div class="medlemdata">
-        <h1>Profile </h1>
         <?php
         foreach ($array as $row) {
-            echo "<p>Username: " . $row['username'] . "<br>Member-ID: " . $row['memberid'] .
-                " </p>";
-            echo '<img src="' . find_profile_image() . '"width="200" height="200" </img>';
+            echo "<h1> " . $row['firstname'] . " - Profile Page</h1><p>Username: " . $row['username'] . "<br>Member-ID: " . $row['memberid'] . "<br>First name: " . $row['firstname'] .
+                "<br>Last name: " . $row['lastname'] . "<br>";
+            " </p>";
+            echo '<img src="' . find_profile_image() . '" width="200" height="200" </img>';
         }
         ?>
         <form action="" method="post" enctype="multipart/form-data">
@@ -55,11 +56,11 @@ $msg = upload_image();
             </div>
 
             <?php
-            if (is_array($msg)){
+            if (is_array($msg)) {
                 echo implode(",", $msg);
             } else {
                 echo $msg;
-            }?>
+            } ?>
         </form>
     </div>
 </div>
