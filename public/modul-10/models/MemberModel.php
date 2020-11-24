@@ -1,6 +1,8 @@
 <?php
 
 require_once "Database.php";
+require_once "UserModel.php";
+require_once "AddressModel.php";
 
 class MemberModel extends Database
 {
@@ -22,20 +24,32 @@ class MemberModel extends Database
 
     /**
      * Adds a new member to the DB.
+     * @param $array array containing all member data
      * @return false|mysqli_result Return either true or false depending
      * on success/failure.
      */
-    public function addMember($firstname, $lastname, $email, $phonenumber, $streetadress, $zipcode, $city, $paid, $interests)
+    public function addMember($array)
     {
-        $sql = "INSERT INTO Members (firstname, lastname, email, phonenumber, streetadress, zipcode, city, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $paid = 0;
+        $addressModel = new AddressModel();
+        $addressid = $addressModel->addAddress($array['streetaddress'], $array['zipcode']);
+        $sql = "INSERT INTO Members (firstname, lastname, email, 
+                     phonenumber, paid, addressid) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->getConnection()->prepare($sql);
-        $stmt->bind_param("sssssssi", $firstname, $lastname, $email, $phonenumber, $streetadress, $zipcode, $city, $paid);
+        $stmt->bind_param("ssssii", $array['firstname'], $array['lastname'], $array['email'],
+            $array['phonenumber'], $paid, $addressid);
         $stmt->execute();
-        $this->addMemberInterests($this->getConnection()->insert_id, $interests);
+        $memberId = $this->getConnection()->insert_id;
+        if ($array['password']){
+            $userModel = new UserModel();
+            $userModel->registerUser($array['email'], $array['password'], $memberId);
+        }
+        $this->addMemberInterests($memberId, $array['interests']);
         $result = $stmt->get_result();
         $stmt->close();
         return $result;
     }
+
 
     /**
      * Adds interests to a member.
@@ -71,5 +85,6 @@ class MemberModel extends Database
         return $result;
 
     }
+
 
 }

@@ -14,7 +14,7 @@ $array = $userModel->getSingleUser($_SESSION['username']);
         <h1>User info</h1>
         <?php
         foreach ($array as $row) {
-            echo "<p>Hi " . $row['username'] . "<br>Your usernumber is: "
+            echo "<p>Welcome, " . $row['username'] . "<br>Your usernumber is: "
                 . $row['userid'] . "<br>Your membernumber is: " . $row['memberid'] . " </p>";
         }
         ?>
