@@ -32,6 +32,7 @@ class MemberModel extends Database
     {
         $paid = 0;
         $addressModel = new AddressModel();
+        // adds address and returns adressid
         $addressid = $addressModel->addAddress($array['streetaddress'], $array['zipcode']);
         $sql = "INSERT INTO Members (firstname, lastname, email, 
                      phonenumber, paid, addressid) VALUES (?, ?, ?, ?, ?, ?)";
@@ -40,10 +41,12 @@ class MemberModel extends Database
             $array['phonenumber'], $paid, $addressid);
         $stmt->execute();
         $memberId = $this->getConnection()->insert_id;
+        // adds user if password has been entered (so that function can be used when admin adds members too)
         if ($array['password']){
             $userModel = new UserModel();
             $userModel->registerUser($array['email'], $array['password'], $memberId);
         }
+        // adds members interests
         $this->addMemberInterests($memberId, $array['interests']);
         $result = $stmt->get_result();
         $stmt->close();

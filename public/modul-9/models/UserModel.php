@@ -32,16 +32,6 @@ class UserModel extends Database
         return $stmt->execute();
     }
 
-//    public function getSingleUser($email){
-//        $sql = "SELECT Users.userid, username, password, memberid FROM Users WHERE
-//                            Users.username = ?";
-//        $stmt = $this->getConnection()->prepare($sql);
-//        $stmt->bind_param('s',$email);
-//        $stmt->execute();
-//        $result = $stmt->get_result();
-//        $stmt->close();
-//        return $result;
-//    }
 
     public function getSingleUser($email){
         $sql = "SELECT * FROM Users JOIN Members M on M.memberid = Users.memberid WHERE 

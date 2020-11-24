@@ -1,13 +1,26 @@
-<!-- Oppgave 3 -->
 <?php
-
 require_once "models/UserModel.php";
 require_once "models/MemberModel.php";
 require_once "models/AddressModel.php";
 require_once "models/InterestsModel.php";
-include './include/header.inc.php';
 include './include/fieldValidation.php';
 
+$addressModel = new AddressModel();
+// Adds a new member to the database if all the required fields have been entered,and the zip code is valid.
+if (isset($_POST['submit']) && allFieldsValueCheck() == true &&
+$addressModel->checkForValidZipCode($_POST['zipcode']) == true) {
+    header("Location:http://www.localhost:8081/modul-10/login.php");
+
+    $memberdata = $_POST;
+    $memberModel = new MemberModel();
+    $memberModel->addMember($memberdata);
+    exit();
+
+    // displays the page if a the submit button have not been clicked
+    // OR some fields are missing values.
+} else {
+
+include './include/header.inc.php';
 $title = "Add member";
 
 ?>
@@ -16,24 +29,7 @@ $title = "Add member";
 
     <?php
 
-
-    $addressModel = new AddressModel();
-    echo $addressModel->addAddress("Grovikveien 54", "4312");
-
     $member = array();
-
-    // Adds a new member to the database if all the required fields have been entered,
-    if (isset($_POST['submit']) && allFieldsValueCheck() == true) {
-
-        $memberdata = $_POST;
-
-        $memberModel = new MemberModel();
-        $memberModel->addMember($memberdata);
-
-
-        echo "Member added";
-    } else {
-
 
     // Populates fields from POST-array.
     function setValue($field)
@@ -133,15 +129,10 @@ $title = "Add member";
                     <input type="text" class="form-control" name="zipcode" pattern="[0-9]{4}"
                            placeholder="1431" <?php setValue("zipcode") ?> />
                     <?php if (empty($_POST['zipcode']) && isset($_POST['submit'])) { ?>
-                        <small class="form-text text-danger">Zip code is missing or not valid.</small>
-                    <?php } ?>
-                </div>
-                <div class="form-group ">
-                    <label for="city">city: </label>
-                    <input type="text" class="form-control" name="city"
-                           placeholder="Stabekk" <?php setValue("city") ?> />
-                    <?php if (empty($_POST['city']) && isset($_POST['submit'])) { ?>
-                        <small class="form-text text-danger">City is missing or not valid.</small>
+                        <small class="form-text text-danger">Zip code is missing</small>
+                    <?php } elseif (isset($_POST['submit'])  // checks with DB if zip code is valid.
+                        && $addressModel->checkForValidZipCode($_POST['zipcode']) == false) { ?>
+                        <small class="form-text text-danger">Zip code is not valid</small>
                     <?php } ?>
                 </div>
             </div>

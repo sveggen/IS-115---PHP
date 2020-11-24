@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     //check if credentials are correct
     if ($userModel->login($_POST['email'], $_POST['password'])) {
         // returns member-credentials from DB
-        $memberid = $userModel->getSingleUser($_POST['email'])->fetch_assoc();
+        $memberid = $userModel->getSingleUserCredentials($_POST['email'])->fetch_assoc();
         //set session variables
         $_SESSION['loggedIn'] = true;
         $_SESSION['username'] = $_POST['email'];
